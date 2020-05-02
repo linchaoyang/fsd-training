@@ -1,0 +1,39 @@
+<div class="container">
+
+  <!-- Content here -->
+  <div class="card my-card" style="width: 18rem;">
+    <div class="text-center">
+      <h3 class="card-title" style="display:inline">{{title}}</h3>
+    </div>
+    <hr>
+    <form [formGroup]="loginForm">
+    <div class="form-group">
+      <input type="text" class="form-control" formControlName="username" placeholder="user name">
+      <div class="validator-invalid"
+        [hidden]="!(loginForm.controls['username'].errors && loginForm.controls['username'].dirty)">
+        User name must input, 6-15 digits!
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" formControlName="password" placeholder="password">
+      <div class="validator-invalid"
+        [hidden]="!(loginForm.controls['password'].errors && loginForm.controls['password'].dirty)">
+        Password must input, 6-15 digit!
+      </div>
+    </div>
+
+  </form>
+  <button type="button" class="btn btn-primary" [disabled]="!loginForm.valid" (click)="doLogin()">Login</button>
+  <ngb-toast
+    *ngIf="toastShow"
+    [delay]="2000"
+    [autohide]="true"
+    (hide)="toastShow = false;"
+    [class.bg-danger]="true"
+  >
+    <div>
+      {{ toastBody }}
+    </div>
+  </ngb-toast>
+  </div>
+</div>

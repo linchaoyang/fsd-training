@@ -1,0 +1,19 @@
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand">{{title}}</a>
+  <form class="form-inline">
+    <input *ngIf="showSearch" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="['/mycard', {{user.id}}]">My card</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="['/profile', {{user.id}}]">{{user.username}}</a>
+      </li>
+    </ul>
+
+  </form>
+</nav>
+
+<router-outlet></router-outlet>

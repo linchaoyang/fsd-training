@@ -1,0 +1,13 @@
+<div class=" rounded_rect vmiddle category-box">
+<a *ngFor="let category of categories" routerLink="/categories/{{category.id}}">
+<svg class="bd-placeholder-img rounded-circle" width="75" height="75" xmlns="http://www.w3.org/2000/svg"
+preserveAspectRatio="xMidYMid slice" focusable="false" role="img" >
+ <title>{{category.name}}</title>
+ <rect width="100%" height="100%" fill="rgb(167, 83, 238)"></rect>
+ <text x="10%" dx="0.1em" y="50%" fill="#dee2e6" dy=".3em" style="font-size: small;">{{category.name}}</text>
+</svg>
+&nbsp;&nbsp;
+</a>
+</div>
+
+

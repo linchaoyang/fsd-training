@@ -1,0 +1,37 @@
+.container {
+
+
+  background: #97c7e0;
+  background-size: 100vw 100vh;
+  width: 100vw;
+  height: 100vh;
+  background-size: 100% 100%;
+
+  .my-card {
+    padding-top: 11%;
+    width: 400px !important;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.8);
+
+    -webkit-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.03);
+    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.03);
+    -moz-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.03);
+    border: 0px;
+
+    .my-check {
+      margin: 0 0 .5rem 0;
+    }
+    .btn {
+    }
+  }
+
+  .validator-invalid{
+    color:#ffffff;
+    background: #f86c6b;
+    padding-left:5px;
+    padding-right:5px;
+    padding-top:3px;
+    padding-bottom: 3px;
+  }
+}

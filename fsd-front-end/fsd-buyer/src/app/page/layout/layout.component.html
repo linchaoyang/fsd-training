@@ -1,0 +1,8 @@
+<div *ngIf="productService.searchKeyWord;else suggestPanel">
+</div>
+<ng-template #suggestPanel>
+  <app-carousel></app-carousel>
+  <app-categories></app-categories>
+</ng-template>
+
+<app-product-list></app-product-list>

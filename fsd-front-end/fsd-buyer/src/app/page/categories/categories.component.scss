@@ -1,0 +1,132 @@
+.category-box {
+  width: 1440px;
+  height: 177px;
+  left: 0px;
+  top: 224px;
+  z-index: 16;
+  background-color: #ffffff;
+  border-color: #ffffff;
+  border-width: 1px;
+  border-style: solid;
+  font-size: 14px;
+  padding: 0px;
+  text-align: center;
+  line-height: 20px;
+  font-weight: normal;
+  font-style: normal;
+  opacity: 1;
+}
+
+.category-widget {
+  width: 88px;
+  height: 114px;
+  position: absolute;
+  z-index: 18;
+  opacity: 1;
+}
+
+.electronic {
+  background-color: rgb(167, 83, 238);
+  border-color: rgb(167, 83, 238);
+}
+
+.fashion {
+  background-color: rgb(167, 83, 238);
+  border-color: rgb(167, 83, 238);
+}
+
+.residential {
+  background-color: rgb(167, 83, 238);
+  border-color: rgb(167, 83, 238);
+}
+
+.ss {
+  width: 82px;
+  height: 18px;
+  z-index: 2;
+  font-size: 14px;
+  text-align: center;
+  line-height: 0px;
+  font-weight: normal;
+  font-style: normal;
+  opacity: 0.68;
+}
+
+widget {
+  position: absolute;
+}
+
+.rounded_rect {
+  background: transparent;
+  color: #101010;
+  overflow: hidden;
+  border-color: #bbb;
+  display: -webkit-box;
+  display: flex;
+}
+
+.vmiddle {
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.hcenter {
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.circle_rect {
+  background: #ffffff;
+  display: -webkit-box;
+  display: flex;
+  width: 88px;
+  height: 88px;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+  border-width: 1px;
+  border-style: solid;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 0px;
+  text-align: center;
+  line-height: 17px;
+  font-weight: bold;
+  font-style: normal;
+  opacity: 1;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+
+.btn-circle.btn-lg {
+  width: 80px;
+  height: 80px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 50px;
+}
+
+.rich_text {
+  display: -webkit-box;
+  display: flex;
+  background: transparent;
+  color: #101010;
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+
+button span{
+	font-size: 20px;
+}

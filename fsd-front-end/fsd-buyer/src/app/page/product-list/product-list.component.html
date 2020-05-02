@@ -1,0 +1,14 @@
+<table class="table table-striped">
+
+  <tbody>
+  <tr *ngFor="let product of products; index as i">
+    <td>
+      <img [src]="product.image" class="mr-2" style="height: 60px; width: auto">
+    </td>
+    <td>{{ product.description }}</td>
+    <td style="color: red;">¥{{ product.price | number }}</td>
+    <td><button type="button" class="btn btn-outline-secondary">{{ product.seller }}</button></td>
+    <td><button class="btn btn-danger">View detail</button></td>
+  </tr>
+  </tbody>
+</table>

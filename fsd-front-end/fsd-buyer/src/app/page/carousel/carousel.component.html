@@ -1,0 +1,15 @@
+<div *ngIf="carousels" class="carousel-box hcenter">
+  <ngb-carousel [interval]="2000" >
+    <ng-template ngbSlide *ngFor="let carousel of carousels; index as i">
+      <a routerLink="/products/{{carousel.productId}}" rel="nofollow noopener noreferrer">
+      <div class="image-wrapper">
+        <img [src]="carousel.src" [alt]="carousel.alt">
+      </div>
+    </a>
+      <div class="carousel-caption">
+        <h3>{{carousel.caption}}</h3>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>
+
