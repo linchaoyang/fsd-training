@@ -1,11 +1,11 @@
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
   <a class="navbar-brand">{{title}}</a>
   <form class="form-inline">
-    <input *ngIf="showSearch" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-
+    <input *ngIf="showSearch" #searchKeyword (keyup.enter)="search(searchKeyword.value)" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <ul class="nav justify-content-end">
       <li class="nav-item">
-        <a class="nav-link active" routerLink="['/mycard', {{user.id}}]">My card</a>
+        <a class="nav-link active" routerLink="['/mycard', {{user.id}}]">My card
+          <span *ngIf="cardNumber > 0" class="badge badge-primary badge-pill">{{cardNumber}}</span></a>
       </li>
 
       <li class="nav-item">

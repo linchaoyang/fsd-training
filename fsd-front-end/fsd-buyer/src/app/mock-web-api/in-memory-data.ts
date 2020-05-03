@@ -20,11 +20,11 @@ export class InMemoryData extends InMemoryDbService {
       ],
       products: [
         {id: 1, category: 'Electronic', subcategory: 'Laptop', image: 'assets/images/products/v2_pyhhub.png',
-        price: 8900, description: 'Apple 2019 Macbook pro 13.3 inch', seller: 'Seller1'},
+        price: 8900, name: 'Apple 2019 Macbook pro 13.3 inch', manufacturer: 'Apple', seller: 'Seller1'},
         {id: 2, category: 'Fashoin', subcategory: 'Dress', image: 'assets/images/products/v2_q8ohsk.png',
-        price: 120, description: 'Man T-shirt white-green', seller: 'Seller2'},
+        price: 120, name: 'Man T-shirt white-green', manufacturer: 'GAP', seller: 'Seller2'},
         {id: 3, category: 'Redidential', subcategory: 'Furniture', image: 'assets/images/products/v2_q8ohxn.png',
-        price: 300, description: 'Classic cabinet (small size)', seller: 'Seller3'}
+        price: 300, name: 'Classic cabinet (small size)', manufacturer: 'Daruma', seller: 'Seller3'}
       ]
     };
   }

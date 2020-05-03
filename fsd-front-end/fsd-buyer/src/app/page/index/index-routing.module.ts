@@ -18,15 +18,15 @@ const routes: Routes = [
     path: '',
     component: IndexComponent,
     canActivate: [AuthGuard],
-    resolve: { carousels: CarouselResolverService,
-      categories: CategoryResolverService,
-      products: ProductsResolveService},
     children: [
       {
         path: '', canActivateChild: [AuthGuard],
         children: [
           {
-            path: '', component: LayoutComponent,
+            path: 'layout', component: LayoutComponent, runGuardsAndResolvers: 'always',
+            resolve: { carousels: CarouselResolverService,
+              categories: CategoryResolverService,
+              products: ProductsResolveService},
             children: [
               { path: 'carousel', component: CarouselComponent },
               { path: 'categories', component: CategoriesComponent }

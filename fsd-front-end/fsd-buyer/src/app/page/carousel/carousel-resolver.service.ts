@@ -1,10 +1,12 @@
+import { switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {
-  Router, Resolve,
+  Resolve,
   RouterStateSnapshot,
-  ActivatedRouteSnapshot
+  ActivatedRouteSnapshot,
+  Router
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { CarouselService } from './carousel.service';
 import { Carousel } from './carousel';
 
@@ -13,10 +15,31 @@ import { Carousel } from './carousel';
 })
 export class CarouselResolverService implements Resolve<Carousel[]> {
 
-  constructor(private cs: CarouselService, private router: Router) {}
+  private searchKeyword: string;
+
+  constructor(private cs: CarouselService, private router: Router) {
+    const state = router.getCurrentNavigation().extras.state as { searchKeyword: string };
+    if (state) {
+      this.searchKeyword = state.searchKeyword;
+    }
+    this.searchKeyword = this.searchKeyword || '';
+  }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Carousel[]> | Observable<never> {
+    if (this.searchKeyword.trim() !== '') {
+      return of([]);
+    }
     return this.cs.getCarousels();
+
+    // return this.route.paramMap.pipe<Carousel[]>(
+    //   switchMap(params => {
+    //     const searchKeyword = params.get('searchKeyword') || '';
+    //     if (searchKeyword.trim() !== '') {
+    //       return of([]);
+    //     }
+    //     return this.cs.getCarousels();
+    //   })
+    // );
 
     // let id = route.paramMap.get('id');
 

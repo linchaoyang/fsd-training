@@ -24,7 +24,9 @@ export class Product {
    tax: number;
 
    /** Product description to be displayed on the page */
-   description: string;
+   name: string;
+
+   manufacturer: string;
 
    seller: string;
 
