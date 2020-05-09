@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - FsdUserApplication",
+            "request": "launch",
+            "mainClass": "fsd.msservice.user.api.FsdUserApplication"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-EurekaApplication<fsd.msservice.eureka>",
+            "request": "launch",
+            "mainClass": "fsd.msservice.eureka.EurekaApplication",
+            "projectName": "fsd.msservice.eureka"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-FsdUserApplication<fsd.msservice.user>",
+            "request": "launch",
+            "mainClass": "fsd.msservice.user.api.FsdUserApplication",
+            "projectName": "fsd.msservice.user"
+        }
+    ]
+}
