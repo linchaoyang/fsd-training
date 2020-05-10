@@ -14,7 +14,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import fsd.model.user.base.Role;
 import fsd.model.user.base.RoleName;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Table(name = "srole")

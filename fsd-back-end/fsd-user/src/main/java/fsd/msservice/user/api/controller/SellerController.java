@@ -15,63 +15,63 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import fsd.model.user.Buyer;
-import fsd.msservice.user.api.service.BuyerService;
+import fsd.model.user.Seller;
+import fsd.msservice.user.api.service.SellerService;
 
 @RestController
-@RequestMapping(value = "/api/buyer", produces = MediaType.APPLICATION_JSON_VALUE)
-public class BuyerController {
+@RequestMapping(value = "/api/seller", produces = MediaType.APPLICATION_JSON_VALUE)
+public class SellerController {
 
     @Autowired
-    private BuyerService service;
+    private SellerService service;
 
     @GetMapping()
-	public List<Buyer> findAll() {
+	public List<Seller> findAll() {
 		return service.findAll();
 	}
 	
 	/**
-	 * Fing buyer based on the user id
+	 * Fing seller based on the user id
 	 * @param id
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public Optional<Buyer> findById(@PathVariable String id) {
+	public Optional<Seller> findById(@PathVariable String id) {
 		return service.findById(id);
 	}
 	
 	/**
-	 * Find user by login user name
+	 * Find seller by login user name
 	 * @param username
 	 * @return
 	 */
 	@GetMapping("/")
-	public Buyer findByUsername(@RequestParam("username") String username) {
+	public Seller findByUsername(@RequestParam("username") String username) {
 		return service.findByUsername(username);
 	}
 	
 	/**
-	 * Regist new buyer
+	 * Regist new seller
 	 * @param user
 	 * @return
 	 */
 	@PostMapping
-	public Buyer regist(@RequestBody Buyer user) {
+	public Seller regist(@RequestBody Seller user) {
 		return service.regist(user);
 	}
  
 	/**
-	 * Update buyer information
+	 * Update seller information
 	 * @param user
 	 * @return
 	 */
 	@PutMapping
-	public Buyer update(@RequestBody Buyer user) {
+	public Seller update(@RequestBody Seller user) {
 		return service.update(user);
 	}
 	
 	/**
-	 * Delete buyer based on the id
+	 * Delete seller based on the id
 	 * @param id
 	 */
 	@DeleteMapping("/{id}")

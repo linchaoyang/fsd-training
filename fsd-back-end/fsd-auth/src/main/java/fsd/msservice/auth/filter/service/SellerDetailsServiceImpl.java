@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import fsd.model.user.Seller;
+import fsd.msservice.auth.api.domain.AuthSeller;
 import fsd.msservice.auth.api.domain.FsdUserDetail;
 import fsd.msservice.auth.api.domain.UserType;
 import fsd.msservice.auth.api.service.SellerService;
@@ -18,12 +18,12 @@ import fsd.msservice.auth.api.service.SellerService;
 public class SellerDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private SellerService sellerService;
+    private SellerService service;
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // get user information from user microservice
-        Seller user = sellerService.authSeller(username);
+        AuthSeller user = service.authSeller(username);
         if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         }

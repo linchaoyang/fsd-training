@@ -1,8 +1,8 @@
 package fsd.msservice.auth.api.service;
 
-import fsd.model.user.Seller;
+import fsd.msservice.auth.api.domain.AuthSeller;
 
 public interface SellerService {
 
-    Seller authSeller(String username);
+    AuthSeller authSeller(String username);
 }

@@ -22,6 +22,9 @@ public interface UserFeignClient {
     @RequestMapping(value="/api/buyer", method = RequestMethod.POST)
     public Buyer registerBuyer(@RequestBody Buyer buyer);
 
+    @RequestMapping(value="/api/buyer", method = RequestMethod.PUT)
+    public Buyer updateBuyer(@RequestBody Buyer buyer);
+
     @RequestMapping(value="/api/seller/{id}", method = RequestMethod.GET)
     public Seller findSellerById(@PathVariable("id") long id);
 
@@ -30,4 +33,7 @@ public interface UserFeignClient {
 
     @RequestMapping(value="/api/seller", method = RequestMethod.POST)
     public Seller registerSeller(@RequestBody Seller seller);
+
+    @RequestMapping(value="/api/seller", method = RequestMethod.PUT)
+    public Seller updateSeller(@RequestBody Seller seller);
 }
