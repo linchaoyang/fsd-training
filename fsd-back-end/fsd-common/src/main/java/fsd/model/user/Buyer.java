@@ -1,10 +1,18 @@
 package fsd.model.user;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import fsd.model.user.base.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,11 +23,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Buyer extends User {
-
-    /**
-     * serialVersionUID
-     */
-    private static final long serialVersionUID = -7637514706277525907L;
 
     /**
      * name
@@ -34,4 +37,12 @@ public class Buyer extends User {
     @Column(name = "MOBILE", length = 22)
     @NotNull
     private String mobile;
+
+       /**
+     * Many-To-Many mapping user and role
+     */
+    @ManyToMany(cascade = { CascadeType.MERGE, }, fetch = FetchType.EAGER) //cascade = { CascadeType.PERSIST, CascadeType.MERGE, }, 
+    @JoinTable(name = "buyer_brole", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    //@JsonIgnore
+    private List<BuyerRole> roles;
 }

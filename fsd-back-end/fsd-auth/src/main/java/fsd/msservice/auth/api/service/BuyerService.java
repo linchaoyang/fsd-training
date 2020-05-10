@@ -4,7 +4,5 @@ import fsd.model.user.Buyer;
 
 public interface BuyerService {
 
-    String authBuyer(String token);
-
-    Buyer authBuyer(String name, String password);
+    Buyer authBuyer(String username);
 }

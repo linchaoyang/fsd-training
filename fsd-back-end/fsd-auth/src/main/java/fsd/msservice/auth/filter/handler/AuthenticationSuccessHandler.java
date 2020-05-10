@@ -1,4 +1,4 @@
-package fsd.msservice.auth.filter;
+package fsd.msservice.auth.filter.handler;
 
 import java.io.IOException;
 
@@ -6,22 +6,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 
 import fsd.model.ResponseResult;
+import fsd.msservice.auth.util.HandlerUtil;
 import fsd.msservice.auth.util.JwtHelper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Component
 public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     /*
      * (non-Javadoc)
@@ -39,11 +37,10 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
         log.info("Login success: username=" + user.getUsername() + " RemoteAddr=" + request.getRemoteAddr()
                 + " RemoteHost=" + request.getRemoteHost() + " RemotePort=" + request.getRemotePort());
         
-        String token = JwtHelper.createJWT(user);
+        String token = JwtHelper.generateToken(user);
         ResponseResult msg = ResponseResult.ok(token);
-        response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(msg));
 
+        HandlerUtil.setResponse(response, HttpStatus.OK, msg);
     }
 
 }

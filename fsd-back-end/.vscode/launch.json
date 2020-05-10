@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - EurekaApplication",
+            "request": "launch",
+            "mainClass": "fsd.msservice.eureka.EurekaApplication",
+            "projectName": "fsd-eureka"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - FsdUserApplication",
             "request": "launch",
             "mainClass": "fsd.msservice.user.api.FsdUserApplication"

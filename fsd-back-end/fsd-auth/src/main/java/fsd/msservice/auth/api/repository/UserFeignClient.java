@@ -1,4 +1,4 @@
-package fsd.msservice.auth.api.feign;
+package fsd.msservice.auth.api.repository;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +17,7 @@ public interface UserFeignClient {
     public Buyer findBuyerById(@PathVariable("id") long id);
 
     @RequestMapping(value="/api/buyer", method = RequestMethod.GET)
-    public Buyer findBuyerByName(@RequestParam("name") String name);
+    public Buyer findBuyerByUserName(@RequestParam("username") String username);
 
     @RequestMapping(value="/api/buyer", method = RequestMethod.POST)
     public Buyer registerBuyer(@RequestBody Buyer buyer);
@@ -26,7 +26,7 @@ public interface UserFeignClient {
     public Seller findSellerById(@PathVariable("id") long id);
 
     @RequestMapping(value="/api/seller", method = RequestMethod.GET)
-    public Seller findSellerByName(@RequestParam("name") String name);
+    public Seller findSellerByUserName(@RequestParam("name") String name);
 
     @RequestMapping(value="/api/seller", method = RequestMethod.POST)
     public Seller registerSeller(@RequestBody Seller seller);

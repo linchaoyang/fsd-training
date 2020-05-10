@@ -8,13 +8,26 @@ import javax.servlet.http.HttpServletRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import fsd.msservice.auth.api.config.WebSecurityConfig;
+import fsd.msservice.auth.api.domain.UserType;
+import fsd.msservice.auth.filter.token.BuyerAuthenticationToken;
+import fsd.msservice.auth.filter.token.SellerAuthenticationToken;
 
 public class JsonUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+    /**
+     * User type key set in the request header
+     */
+    private static final String HEADER_USER_TYPE = "userType";
+
     public JsonUsernamePasswordAuthenticationFilter() {
-        // Use super login: "/login", "POST"
-        super();
+        // Use login: "/api/login", "POST"
+        super.setRequiresAuthenticationRequestMatcher(
+                new AntPathRequestMatcher(WebSecurityConfig.LOGIN_ENTRY_POINT, "POST"));
     }
 
     @Override
@@ -27,21 +40,31 @@ public class JsonUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
         return getJsonData(request).get(SPRING_SECURITY_FORM_PASSWORD_KEY).toString();
     }
 
-    private Map<?, ?> getJsonData(HttpServletRequest request) {
+    @Override
+    protected void setDetails(HttpServletRequest request, UsernamePasswordAuthenticationToken authRequest) {
+        if (request.getHeader(HEADER_USER_TYPE).equals(UserType.Buyer.getType())) {
+            authRequest = new BuyerAuthenticationToken(authRequest.getPrincipal(), authRequest.getCredentials());
+        } else if (request.getHeader(HEADER_USER_TYPE).equals(UserType.Buyer.getType())) {
+            authRequest = new SellerAuthenticationToken(authRequest.getPrincipal(), authRequest.getCredentials());
+        }
+        super.setDetails(request, authRequest);
+    }
+
+    private Map<?, ?> getJsonData(final HttpServletRequest request) {
         try {
-            ServletInputStream ris = request.getInputStream();
-            StringBuilder content = new StringBuilder();
-            byte[] b = new byte[1024];
+            final ServletInputStream ris = request.getInputStream();
+            final StringBuilder content = new StringBuilder();
+            final byte[] b = new byte[1024];
             int lens = -1;
             while ((lens = ris.read(b)) > 0) {
                 content.append(new String(b, 0, lens));
             }
-            String strcont = content.toString();// content
-            ObjectMapper mapper = new ObjectMapper(); // JSON converter
-            Map<?, ?> map = mapper.readValue(strcont, Map.class);
+            final String strcont = content.toString();// content
+            final ObjectMapper mapper = new ObjectMapper(); // JSON converter
+            final Map<?, ?> map = mapper.readValue(strcont, Map.class);
 
             return map;
-        } catch (Exception e) {
+        } catch (final Exception e) {
             throw new AuthenticationServiceException("Login request parameter not exist.");
         }
     }

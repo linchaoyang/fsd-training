@@ -1,4 +1,4 @@
-package fsd.msservice.auth.filter;
+package fsd.msservice.auth.filter.handler;
 
 import java.io.IOException;
 
@@ -6,21 +6,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.stereotype.Component;
 
 import fsd.model.ResponseResult;
+import fsd.msservice.auth.util.HandlerUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Component
 public class AuthenctiationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     /*
      * (non-Javadoc)
@@ -39,10 +36,7 @@ public class AuthenctiationFailureHandler extends SimpleUrlAuthenticationFailure
 
         ResponseResult msg = ResponseResult.error(exception.getMessage());
 
-        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(msg));
-
+        HandlerUtil.setResponse(response, HttpStatus.INTERNAL_SERVER_ERROR, msg);
     }
 
 }
