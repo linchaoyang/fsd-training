@@ -1,4 +1,4 @@
-package fsd.msservice.product.api.repository;
+package fsd.msservice.transaction.api.repository;
 
 import java.util.Date;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import fsd.msservice.product.api.domain.SuggestCarousel;
+import fsd.msservice.transaction.api.domain.SuggestCarousel;
 
 @Repository
 public interface SuggestCarouselRepository extends JpaRepository<SuggestCarousel, String> {

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - FsdProductApplication",
+            "request": "launch",
+            "mainClass": "fsd.msservice.product.api.FsdProductApplication",
+            "projectName": "fsd-product"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - EurekaApplication",
             "request": "launch",
             "mainClass": "fsd.msservice.eureka.EurekaApplication",

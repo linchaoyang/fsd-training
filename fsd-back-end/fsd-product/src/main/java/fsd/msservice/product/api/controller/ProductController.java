@@ -42,8 +42,8 @@ public class ProductController {
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public Optional<Product> findById(@PathVariable String id) {
-		return service.findById(id);
+	public Product findById(@PathVariable String id) {
+		return service.findById(id).get();
 	}
 
 	/**
@@ -86,7 +86,6 @@ public class ProductController {
 	 */
 	@DeleteMapping("/{id}")
 	public void deleteById(@PathVariable String id) {
-		service.delete(id);
+		service.deleteById(id);
 	}
-
 }

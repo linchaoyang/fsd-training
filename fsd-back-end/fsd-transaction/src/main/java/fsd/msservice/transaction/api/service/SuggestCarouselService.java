@@ -1,9 +1,9 @@
-package fsd.msservice.product.api.service;
+package fsd.msservice.transaction.api.service;
 
 import java.util.Date;
 import java.util.List;
 
-import fsd.msservice.product.api.domain.SuggestCarousel;
+import fsd.msservice.transaction.api.domain.SuggestCarousel;
 
 public interface SuggestCarouselService {
     

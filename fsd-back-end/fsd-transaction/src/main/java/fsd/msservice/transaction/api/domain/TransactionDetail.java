@@ -1,16 +1,18 @@
-package fsd.msservice.product.api.domain;
+package fsd.msservice.transaction.api.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,38 +27,22 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "suggest_carousel")
+@Table(name = "transaction_detail")
 @EntityListeners(AuditingEntityListener.class)
-public class SuggestCarousel {
+public class TransactionDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // @Column(name = "product_id", columnDefinition = "varchar(64) not null comment 'product id'")
+    // private String productId;
+
     @Column(name = "product_id", columnDefinition = "varchar(64) not null comment 'product id'")
     private String productId;
 
-    @Column(name = "seq", columnDefinition = "int not null comment 'image carousel index'")
-    private Integer seq;
-
-    @Column(name = "image_url", columnDefinition = "varchar(200) not null comment 'image url'")
-    private String imageUrl;
-
-    @Column(name = "title", columnDefinition = "varchar(60) not null comment 'image title'")
-    private String title;
-
-    @Column(name = "description", columnDefinition = "varchar(200) not null comment 'image description'")
-    private String description;
-
-    @Column(name = "start_time", columnDefinition = "datetime not null comment 'show start time'")
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date start;
-
-    @Column(name = "end_time", columnDefinition = "datetime not null comment 'show end time'")
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date end;
+    @Column(name = "stock", columnDefinition = "int not null comment 'purchase stock number'")
+    private Integer stock;
 
     /**
      * Created time
@@ -73,4 +59,14 @@ public class SuggestCarousel {
     @Column(name = "updated_date")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updated;
+
+    @ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.MERGE }) //
+    @JoinColumn(name = "transaction_id")
+    @JsonIgnore
+    private Transaction detail;
+
+    public ProductCarousel(Integer seq, String imageUrl) {
+        this.seq = seq;
+        this.imageUrl = imageUrl;
+    }
 }

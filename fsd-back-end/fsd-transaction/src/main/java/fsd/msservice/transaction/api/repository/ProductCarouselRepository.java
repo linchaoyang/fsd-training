@@ -1,4 +1,4 @@
-package fsd.msservice.product.api.repository;
+package fsd.msservice.transaction.api.repository;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import fsd.msservice.product.api.domain.Product;
-import fsd.msservice.product.api.domain.ProductCarousel;
+import fsd.msservice.transaction.api.domain.Product;
+import fsd.msservice.transaction.api.domain.ProductCarousel;
 
 @Repository
 public interface ProductCarouselRepository extends JpaRepository<ProductCarousel, Integer> {

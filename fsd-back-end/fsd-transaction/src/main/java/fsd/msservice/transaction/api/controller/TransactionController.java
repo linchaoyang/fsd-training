@@ -1,4 +1,4 @@
-package fsd.msservice.product.api.controller;
+package fsd.msservice.transaction.api.controller;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -17,24 +17,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import fsd.msservice.product.api.domain.SuggestCarousel;
-import fsd.msservice.product.api.service.SuggestCarouselService;
+import fsd.msservice.transaction.api.domain.SuggestCarousel;
+import fsd.msservice.transaction.api.service.SuggestCarouselService;
 
 @RestController
-@RequestMapping(value = "/api/carousel", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CarouselController {
+@RequestMapping(value = "/api/transaction", produces = MediaType.APPLICATION_JSON_VALUE)
+public class TransactionController {
 
 	@Autowired
 	private SuggestCarouselService service;
 
 	/**
-	 * Find carousels between start and end date
+	 * GET transaction information under one buyer
 	 * 
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	@GetMapping("/")
+	@GetMapping("buyer/{id}")
 	public List<SuggestCarousel> findAllWithinShowPeriod(@RequestParam("start") String start,
 			@RequestParam("end") String end) {
 		DateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -48,12 +48,12 @@ public class CarouselController {
 	}
 
 	/**
-	 * Add new carousel
+	 * Create new transaction for one buyer
 	 * 
 	 * @param carousel
 	 * @return
 	 */
-	@PostMapping
+	@PostMapping("buyer")
 	public SuggestCarousel add(@RequestBody SuggestCarousel carousel) {
 		return service.add(carousel);
 	}

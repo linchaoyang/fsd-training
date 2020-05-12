@@ -1,9 +1,9 @@
-package fsd.msservice.product.api.service;
+package fsd.msservice.transaction.api.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import fsd.msservice.product.api.domain.Product;
+import fsd.msservice.transaction.api.domain.Product;
 
 public interface ProductService {
 
