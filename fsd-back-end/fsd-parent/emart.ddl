@@ -83,23 +83,48 @@ create table seller_srole (
     CONSTRAINT fk_seller foreign key (user_id) references seller (id) on update cascade on delete cascade
 );
 
+drop table if exists subcategory;
+drop table if exists category;
+
+create table category (
+    id varchar(64) not null comment 'category id', 
+    name varchar(200) not null comment 'category name', 
+    description varchar(2000) not null comment 'category description', 
+    created_date datetime(6), 
+    updated_date datetime(6), 
+    primary key (id)
+);
+
+create table subcategory (
+    id varchar(64) not null comment 'subcategory id', 
+    category_id varchar(64) not null comment 'category id', 
+    name varchar(200) not null comment 'subcategory name', 
+    description varchar(2000) not null comment 'subcategory description', 
+    tax DECIMAL(7,2) not null comment 'tax percent, 5.5 means 5.5%', 
+    created_date datetime(6), 
+    updated_date datetime(6), 
+    primary key (id),
+    CONSTRAINT fk_subcategory foreign key (category_id) references category (id) on update cascade on delete cascade
+);
+
+
 drop table if exists product_carousel;
 drop table if exists suggest_carousel;
 drop table if exists product;
 
 create table product (
-    id varchar(64) not null, 
-    category_id varchar(64) not null comment 'category id', 
-    created_date datetime(6), 
-    description varchar(2000) not null comment 'product description', 
-    item_name varchar(200) not null comment 'product name', 
+    id varchar(64) not nullcomment 'product id', 
+    name varchar(200) not null comment 'product name', 
     price DECIMAL(7,2) not null comment 'product price', 
+    description varchar(2000) not null comment 'product description', 
     remarks varchar(100) comment 'remarks', 
-    seller_id varchar(64) not null comment 'seller id', 
     status char(1) not null default '0' comment 'Normal:0 / Locked:1 / Disabled: 2', 
     stock_number int not null comment 'product stock number', 
+    image_url varchar(200) not null comment 'image url', 
+    category_id varchar(64) not null comment 'category id', 
     subcategory_id varchar(64) not null comment 'subcategory id', 
-    thumbnei_url varchar(200) not null comment 'thumbnei url', 
+    seller_id varchar(64) not null comment 'seller id', 
+    created_date datetime(6), 
     updated_date datetime(6), 
     primary key (id)
 );
@@ -128,4 +153,43 @@ create table suggest_carousel (
     updated_date datetime(6), 
     primary key (id),
     CONSTRAINT fk_suggest_carousel foreign key (product_id) references product (id)
+);
+
+
+drop table if exists transaction_detail;
+drop table if exists transaction;
+
+create table transaction (
+    id varchar(64) not null comment 'transaction id', 
+    buyer_id varchar(64) not null comment 'buyer id', 
+    buyer_name varchar(200) not null comment 'buyer name', 
+    email varchar(30) not null comment 'buyer email', 
+    mobile varchar(22) not null comment 'buyer mobile', 
+    total_amount DECIMAL(7,2) not null comment 'purchase total money amount', 
+    total_tax DECIMAL(7,2) not null comment 'purchase total money tax', 
+    discount_code varchar(64) comment 'discount code', 
+    status char(1) not null default '0' comment '0: normal; 1: deleted by buyer', 
+    remarks varchar(100) comment 'remarks', 
+    created_date datetime(6), 
+    updated_date datetime(6), 
+    primary key (id)
+);
+
+create table transaction_detail (
+    id varchar(64) not null comment 'transaction detail id', 
+    transaction_id varchar(64) not null comment 'transaction id', 
+    seq char(1) not null comment 'detail index', 
+    product_id varchar(64) not null comment 'product id', 
+    product_name varchar(200) not null comment 'product name', 
+    seller_id varchar(64) not null comment 'seller id', 
+    seller_name varchar(200) not null comment 'seller name', 
+    stock_number int not null comment 'purchase stock number', 
+    image_url varchar(200) not null comment 'image url', 
+    price DECIMAL(7,2) not null comment 'purchase price', 
+    total_amount DECIMAL(7,2) not null comment 'purchase total money amount', 
+    total_tax DECIMAL(7,2) not null comment 'purchase total money tax', 
+    created_date datetime(6), 
+    updated_date datetime(6), 
+    primary key (id),
+    CONSTRAINT fk_transaction_detail foreign key (transaction_id) references transaction (id)
 );

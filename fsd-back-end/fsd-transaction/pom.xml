@@ -7,9 +7,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../fsd-parent</relativePath> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>fsd.msservice</groupId>
 	<artifactId>fsd-transaction</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>Transaction</name>
 	<description>Transaction service</description>
 
@@ -25,6 +23,8 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+		
+		
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -9,6 +9,10 @@ spring:
         url: jdbc:mysql://localhost:3306/emart?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=UTC
         username: emartuser
         password: 1234
+        tomcat:
+            max-active: 2
+            initial-size: 2
+            
     jpa:
         generate-ddl: true
         show-sql: true

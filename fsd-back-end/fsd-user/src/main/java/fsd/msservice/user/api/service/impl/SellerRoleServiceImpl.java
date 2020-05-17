@@ -7,47 +7,56 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.stereotype.Service;
 
 import fsd.model.user.SellerRole;
 import fsd.model.user.base.RoleName;
 import fsd.msservice.user.api.repository.SellerRoleRepository;
 import fsd.msservice.user.api.service.SellerRoleService;
 
+@Service
 public class SellerRoleServiceImpl implements SellerRoleService {
 
-    @Autowired
-    private SellerRoleRepository repository;
+	@Autowired
+	private SellerRoleRepository repository;
 
-    public Long count() {
-        return repository.count();
-    }
+	@Override
+	public Long count() {
+		return repository.count();
+	}
 
-    public List<SellerRole> findAll() {
-        return repository.findAll();
-    }
+	@Override
+	public List<SellerRole> findAll() {
+		return repository.findAll();
+	}
 
-    public Optional<SellerRole> findById(Integer id) {
-        return repository.findById(id);
-    }
+	@Override
+	public Optional<SellerRole> findById(Integer id) {
+		return repository.findById(id);
+	}
 
-    public Optional<SellerRole> findByName(RoleName name) {
-        SellerRole role = new SellerRole(name);
-        Example<SellerRole> example = Example.of(role);
-        return repository.findOne(example);
-    }
+	@Override
+	public Optional<SellerRole> findByName(RoleName name) {
+		SellerRole role = new SellerRole(name);
+		Example<SellerRole> example = Example.of(role);
+		return repository.findOne(example);
+	}
 
-    @Transactional
-    public SellerRole add(SellerRole role) {
-        return repository.save(role);
-    }
+	@Override
+	@Transactional
+	public SellerRole add(SellerRole role) {
+		return repository.save(role);
+	}
 
-    @Transactional
-    public SellerRole update(SellerRole role) {
-        return repository.save(role);
-    }
+	@Override
+	@Transactional
+	public SellerRole update(SellerRole role) {
+		return repository.save(role);
+	}
 
-    @Transactional
-    public void delete(Integer id) {
-        repository.deleteById(id);
-    }
+	@Override
+	@Transactional
+	public void delete(Integer id) {
+		repository.deleteById(id);
+	}
 }

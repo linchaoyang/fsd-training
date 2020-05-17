@@ -1,4 +1,4 @@
-package fsd.msservice.transaction.api.exception;
+package fsd.expection;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

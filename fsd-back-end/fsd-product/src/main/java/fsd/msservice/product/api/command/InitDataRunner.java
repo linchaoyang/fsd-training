@@ -1,49 +1,40 @@
-package fsd.msservice.product.api;
+package fsd.msservice.product.api.command;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
+import org.apache.commons.lang.time.DateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 
-import fsd.msservice.product.api.config.ApplicationConfig;
+import fsd.msservice.product.api.domain.Product;
+import fsd.msservice.product.api.domain.ProductCarousel;
+import fsd.msservice.product.api.domain.SuggestCarousel;
+import fsd.msservice.product.api.repository.ProductCarouselRepository;
+import fsd.msservice.product.api.repository.ProductRepository;
+import fsd.msservice.product.api.repository.SuggestCarouselRepository;
 
+@Component
+@ConditionalOnProperty(prefix = "job.autorun", name = "enabled", havingValue = "true", matchIfMissing = true)
+public class InitDataRunner implements CommandLineRunner {
 
-@SpringBootApplication
-@Import({ApplicationConfig.class})
-public class FsdProductApplication {
+    @Autowired
+    private ProductRepository productRepository;
 
-	public static void main(String[] args) {
-		SpringApplication.run(FsdProductApplication.class, args);
-	}
+    @Autowired
+    private ProductCarouselRepository productCarouselRepository;
 
-	@Bean
-	public ObjectMapper objectMapper() {
-		return new ObjectMapper();
-    }
-
-
-	/**
-	 * Initialize database for test
-	 * 
-	 * @param productRepository
-	 * @param productCarouselRepository
-	 * @param suggestCarouselRepository
-	 * @return
-	 */
-	/*
-	@Bean
-	CommandLineRunner initData(ProductRepository productRepository, ProductCarouselRepository productCarouselRepository,
-	SuggestCarouselRepository suggestCarouselRepository) {
-		return args -> {
-			// Role adminRole = roleRepository.findByName("ROLE_ADMIN");
-			// if (ObjectUtils.isEmpty(adminRole)) {
-			// 	adminRole = new Role("ROLE_ADMIN");
-			// 	adminRole.setNote("Admin");s
-			// 	roleRepository.saveAndFlush(adminRole);u
-			// }
-			List<Product> products = productRepository.findAll();
+    @Autowired
+    private SuggestCarouselRepository suggestCarouselRepository;
+    
+    @Override
+    public void run(String... args) throws Exception {
+        List<Product> products = productRepository.findAll();
 			if (ObjectUtils.isEmpty(products)) {
 
 				Product product = new Product();
@@ -87,7 +78,7 @@ public class FsdProductApplication {
 				suggestCarousel.setEnd(DateUtils.addHours(new Date(), 24));
 				suggestCarouselRepository.save(suggestCarousel);
 			}
-		};
-	}
-	*/
+
+    }
+    
 }

@@ -5,32 +5,29 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.ObjectUtils;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fsd.model.user.Buyer;
 import fsd.model.user.BuyerRole;
 import fsd.model.user.Seller;
 import fsd.model.user.SellerRole;
 import fsd.model.user.UserStatus;
+import fsd.msservice.user.api.config.ApplicationConfig;
 import fsd.msservice.user.api.repository.BuyerRepository;
 import fsd.msservice.user.api.repository.BuyerRoleRepository;
 import fsd.msservice.user.api.repository.SellerRepository;
 import fsd.msservice.user.api.repository.SellerRoleRepository;
 
-@EnableDiscoveryClient
 @SpringBootApplication
-@EntityScan("fsd.model.user")
-@EnableJpaAuditing
+@Import(ApplicationConfig.class)
 public class FsdUserApplication {
 
 	public static void main(String[] args) {
@@ -57,9 +54,9 @@ public class FsdUserApplication {
 		return args -> {
 			// Role adminRole = roleRepository.findByName("ROLE_ADMIN");
 			// if (ObjectUtils.isEmpty(adminRole)) {
-			// 	adminRole = new Role("ROLE_ADMIN");
-			// 	adminRole.setNote("Admin");
-			// 	roleRepository.saveAndFlush(adminRole);u
+			// adminRole = new Role("ROLE_ADMIN");
+			// adminRole.setNote("Admin");
+			// roleRepository.saveAndFlush(adminRole);u
 			// }
 			BuyerRole buyerRole = buyerRoleRepository.findByName("ROLE_BUYER");
 			if (ObjectUtils.isEmpty(buyerRole)) {
@@ -87,7 +84,7 @@ public class FsdUserApplication {
 				buyer.setExpireDate(c.getTime());
 				buyer.setName("zz name");
 				buyer.setMobile("13811111111");
-				//buyer = buyerRepository.save(buyer);
+				// buyer = buyerRepository.save(buyer);
 				List<BuyerRole> buyerRoles = new ArrayList<>();
 				buyerRoles.add(buyerRole);
 				buyer.setRoles(buyerRoles);
@@ -111,7 +108,7 @@ public class FsdUserApplication {
 				seller.setGstin("1133323");
 				seller.setPostalAddress("Yangpu, Shanghai, China");
 				seller.setContactNumber("86-21-33233222");
-				//seller = sellerRepository.save(seller);
+				// seller = sellerRepository.save(seller);
 				List<SellerRole> sellerRoles = new ArrayList<>();
 				sellerRoles.add(sellerRole);
 				seller.setRoles(sellerRoles);

@@ -8,7 +8,6 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../fsd-parent</relativePath> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>fsd.msservice</groupId>
 	<artifactId>fsd-eureka</artifactId>
 	<name>eureka</name>
 	<description>Eureka server</description>
