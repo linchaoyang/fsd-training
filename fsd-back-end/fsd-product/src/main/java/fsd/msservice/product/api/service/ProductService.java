@@ -1,26 +1,26 @@
 package fsd.msservice.product.api.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import fsd.msservice.product.api.domain.Product;
+import fsd.model.product.ProductDetailVO;
+import fsd.model.product.ProductSummaryVO;
 
 public interface ProductService {
 
-    Long count();
+	Long count();
 
-    List<Product> findAll();
-    
-    List<Product> findByName(String name);
+	List<ProductSummaryVO> findAll();
 
-    List<Product> findAllByCategoryId(String categoryId);
+	List<ProductSummaryVO> findByName(String name);
 
-    Optional<Product> findById(String id);
+	List<ProductSummaryVO> findAllByCategoryId(String categoryId);
 
-    Product add(Product product);
+	ProductDetailVO findById(String id);
 
-    Product update(Product product);
+	void add(ProductDetailVO product);
 
-    void deleteById(String id);
+	void update(ProductDetailVO product);
+
+	void deleteById(String id);
 
 }

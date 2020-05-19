@@ -1,7 +1,6 @@
 package fsd.msservice.product.api.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -15,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import fsd.msservice.product.api.domain.Product;
+import fsd.model.product.ProductDetailVO;
+import fsd.model.product.ProductSummaryVO;
 import fsd.msservice.product.api.service.ProductService;
 
 @RestController
@@ -26,12 +26,12 @@ public class ProductController {
 	private ProductService service;
 
 	@GetMapping()
-	public List<Product> findAll() {
+	public List<ProductSummaryVO> findAll() {
 		return service.findAll();
 	}
 
 	@GetMapping("/category/{id}")
-	public List<Product> findAllByCategoryId(@PathVariable String id) {
+	public List<ProductSummaryVO> findAllByCategoryId(@PathVariable String id) {
 		return service.findAllByCategoryId(id);
 	}
 
@@ -42,8 +42,8 @@ public class ProductController {
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public Product findById(@PathVariable String id) {
-		return service.findById(id).get();
+	public ProductDetailVO findById(@PathVariable String id) {
+		return service.findById(id);
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class ProductController {
 	 * @return
 	 */
 	@GetMapping("/")
-	public List<Product> findByName(@RequestParam("name") String name) {
+	public List<ProductSummaryVO> findByName(@RequestParam("name") String name) {
 		return service.findByName(name);
 	}
 
@@ -64,8 +64,8 @@ public class ProductController {
 	 * @return
 	 */
 	@PostMapping
-	public Product add(@RequestBody Product product) {
-		return service.add(product);
+	public void add(@RequestBody ProductDetailVO product) {
+		service.add(product);
 	}
 
 	/**
@@ -75,8 +75,8 @@ public class ProductController {
 	 * @return
 	 */
 	@PutMapping
-	public Product update(@RequestBody Product product) {
-		return service.update(product);
+	public void update(@RequestBody ProductDetailVO product) {
+		service.update(product);
 	}
 
 	/**

@@ -13,16 +13,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.constraints.Digits;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -50,9 +48,6 @@ public class Product {
 	@Column(name = "category_id", columnDefinition = "varchar(64) not null comment 'category id'")
 	private String categoryId;
 
-	@Transient
-	private String categoryName;
-
 	/**
 	 * subcatetory id
 	 */
@@ -64,9 +59,6 @@ public class Product {
 	 */
 	@Column(name = "seller_id", columnDefinition = "varchar(64) not null comment 'seller id'")
 	private String sellerId;
-
-	@Transient
-	private String sellerName;
 
 	/**
 	 * product price
@@ -101,7 +93,7 @@ public class Product {
 	private String remarks;
 
 	@Column(name = "image_url", columnDefinition = "varchar(200) not null comment 'image url'")
-	private String thumbneiUrl;
+	private String imageUrl;
 
 	/**
 	 * product enable flag

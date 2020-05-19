@@ -9,13 +9,13 @@ import fsd.msservice.transaction.api.model.SellerTransactionVO;
 
 public interface TransactionService {
 
-	/**
-	 * Find all transactions under one buyer
-	 * 
-	 * @param buyerId
-	 * @return
-	 */
-	List<BuyerTransactionVO> findAllByBuyer(String buyerId);
+//	/**
+//	 * Find all transactions under one buyer
+//	 * 
+//	 * @param buyerId
+//	 * @return
+//	 */
+//	List<BuyerTransactionVO> findAllByBuyer(String buyerId);
 
 	/**
 	 * Find all transactions under one buyer during period
@@ -49,13 +49,13 @@ public interface TransactionService {
 	 */
 	List<BuyerTransactionDetailVO> findDetailsById(String transactionId);
 
-	/**
-	 * Find all transactions under one seller
-	 * 
-	 * @param sellerId
-	 * @return
-	 */
-	List<SellerTransactionVO> findAllBySeller(String sellerId);
+//	/**
+//	 * Find all transactions under one seller
+//	 * 
+//	 * @param sellerId
+//	 * @return
+//	 */
+//	List<SellerTransactionVO> findAllBySeller(String sellerId);
 
 	/**
 	 * Find all transactions under one seller during period

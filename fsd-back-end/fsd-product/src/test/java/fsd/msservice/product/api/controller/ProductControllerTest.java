@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import fsd.model.product.ProductSummaryVO;
 import fsd.msservice.product.api.domain.Product;
 import fsd.msservice.product.api.service.ProductService;
 
@@ -45,9 +46,9 @@ public class ProductControllerTest {
 	public void testFindAll() throws Exception {
 		assertNotNull(this.service);
 
-		Product product = createProduct();
+		ProductSummaryVO product = createProduct();
 
-		List<Product> products = Arrays.asList(product);
+		List<ProductSummaryVO> products = Arrays.asList(product);
 
 		when(service.findAll()).thenReturn(products);
 
@@ -60,11 +61,11 @@ public class ProductControllerTest {
 		assertEquals(product.getName(), list.get(0).getName());
 	}
 
-	private Product createProduct() {
-		Product product = new Product();
+	private ProductSummaryVO createProduct() {
+		ProductSummaryVO product = new ProductSummaryVO();
 		product.setName("product name");
 		product.setPrice(new BigDecimal(100.00));
-		product.setThumbneiUrl("http://xxx.com/dd.jpg");
+		product.setImageUrl("http://xxx.com/dd.jpg");
 
 		return product;
 	}

@@ -1,32 +1,38 @@
 server:
-    port: 2100
+  port: 2100
 
 spring:
-    application:
-        name: fsd-user
-    datasource:
-        driver-class-name: com.mysql.jdbc.Driver #com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/emart?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=UTC
-        username: emartuser
-        password: 1234
-        tomcat:
-            max-active: 2
-            initial-size: 2
-            
-    jpa:
-        generate-ddl: true
-        show-sql: true
-        properties:
-            hibernate: 
-                format-sql: true
-        database-platform: org.hibernate.dialect.MySQL8Dialect
-        hibernate:
-            #ddl-auto: none
-            ddl-auto: update
+  application:
+    name: fsd-user
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver #com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/emart?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=UTC
+    username: emartuser
+    password: 1234
+    type: org.apache.commons.dbcp2.BasicDataSource
+    dbcp2:
+    #tomcat:
+      initial-size: 1
+      max-idle: 5
+      min-idle: 2
+      #max-active: 5
+      #max-wait: 10000
+      max-wait-millis: 10000
+
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate: 
+        format-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      #ddl-auto: none
+      ddl-auto: update
 
 eureka:
-    client:
-        serviceUrl:
-            defaultZone: http://localhost:8761/eureka/
-    instance:
-        prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true

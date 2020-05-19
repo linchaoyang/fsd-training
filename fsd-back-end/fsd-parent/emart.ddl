@@ -87,7 +87,7 @@ drop table if exists subcategory;
 drop table if exists category;
 
 create table category (
-    id varchar(64) not null comment 'category id', 
+    id integer not null auto_increment comment 'category id', 
     name varchar(200) not null comment 'category name', 
     description varchar(2000) not null comment 'category description', 
     created_date datetime(6), 
@@ -96,8 +96,8 @@ create table category (
 );
 
 create table subcategory (
-    id varchar(64) not null comment 'subcategory id', 
-    category_id varchar(64) not null comment 'category id', 
+    id integer not null auto_increment comment 'subcategory id', 
+    category_id integer not null comment 'category id', 
     name varchar(200) not null comment 'subcategory name', 
     description varchar(2000) not null comment 'subcategory description', 
     tax DECIMAL(7,2) not null comment 'tax percent, 5.5 means 5.5%', 
@@ -106,7 +106,6 @@ create table subcategory (
     primary key (id),
     CONSTRAINT fk_subcategory foreign key (category_id) references category (id) on update cascade on delete cascade
 );
-
 
 drop table if exists product_carousel;
 drop table if exists suggest_carousel;
@@ -121,9 +120,10 @@ create table product (
     status char(1) not null default '0' comment 'Normal:0 / Locked:1 / Disabled: 2', 
     stock_number int not null comment 'product stock number', 
     image_url varchar(200) not null comment 'image url', 
-    category_id varchar(64) not null comment 'category id', 
-    subcategory_id varchar(64) not null comment 'subcategory id', 
+    category_id integer not null comment 'category id', 
+    subcategory_id integer not null comment 'subcategory id', 
     seller_id varchar(64) not null comment 'seller id', 
+    manufacture varchar(100) not null comment 'manufacture',
     created_date datetime(6), 
     updated_date datetime(6), 
     primary key (id)
@@ -137,7 +137,7 @@ create table product_carousel (
     updated_date datetime(6), 
     product_id varchar(64) not null comment 'product id',
     primary key (id),
-    CONSTRAINT fk_product_carousel foreign key (product_id) references product (id)
+    CONSTRAINT fk_product_carousel foreign key (product_id) references product (id) on update cascade on delete cascade
 );
 
 create table suggest_carousel (

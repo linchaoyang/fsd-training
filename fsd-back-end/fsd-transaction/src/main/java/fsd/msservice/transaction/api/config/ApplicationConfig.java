@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @Configuration
 @EnableJpaAuditing
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients("fsd.msservice.transaction.api.repository")
 public class ApplicationConfig {
 
 }

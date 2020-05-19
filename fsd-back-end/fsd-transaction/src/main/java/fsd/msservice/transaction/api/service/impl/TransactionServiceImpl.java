@@ -24,6 +24,7 @@ import fsd.msservice.transaction.api.repository.TransactionDetailRepository;
 import fsd.msservice.transaction.api.repository.TransactionRepository;
 import fsd.msservice.transaction.api.repository.UserFeignClient;
 import fsd.msservice.transaction.api.service.TransactionService;
+import fsd.util.JpaConvertUtil;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -41,13 +42,9 @@ public class TransactionServiceImpl implements TransactionService {
 	private ObjectProvider<UserFeignClient> userClient;
 
 	@Override
-	public List<BuyerTransactionVO> findAllByBuyer(String buyerId) {
-		return repository.findAllByBuyer(buyerId);
-	}
-
-	@Override
 	public List<BuyerTransactionVO> findAllUnderBuyerByPeriod(String buyerId, String start, String end) {
-		return repository.findAllUnderBuyerByPeriod(buyerId, start, end);
+		return JpaConvertUtil.convertResult(repository.findAllUnderBuyerByPeriod(buyerId, start, end),
+				BuyerTransactionVO.class);
 	}
 
 	@Override
@@ -144,18 +141,13 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public List<BuyerTransactionDetailVO> findDetailsById(String transactionId) {
-		return detailRepository.findDetailsById(transactionId);
-	}
-
-	@Override
-	public List<SellerTransactionVO> findAllBySeller(String sellerId) {
-
-		return repository.findAllBySeller(sellerId);
+		return JpaConvertUtil.convertResult(detailRepository.findDetailsById(transactionId),
+				BuyerTransactionDetailVO.class);
 	}
 
 	@Override
 	public List<SellerTransactionVO> findAllUnderSellerByPeriod(String sellerId, String start, String end) {
-		return repository.findAllUnderSellerByPeriod(sellerId, start, end);
+		return JpaConvertUtil.convertResult(repository.findAllUnderSellerByPeriod(sellerId, start, end),
+				SellerTransactionVO.class);
 	}
-
 }

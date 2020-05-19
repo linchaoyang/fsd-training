@@ -34,24 +34,35 @@ public class TransactionController {
 	 * Find all transactions under one buyer during period
 	 * 
 	 * @param buyerId
-	 * @param start
-	 * @param end
+	 * @param start   start date with yyyyMMdd format
+	 * @param end     end date with yyyyMMdd format
 	 * @return
 	 */
 	@GetMapping("buyer/{id}")
 	public List<BuyerTransactionVO> findAllUnderBuyerByPeriod(@PathVariable("id") String buyerId,
-			@RequestParam("start") String start, @RequestParam("end") String end) {
-		if (StringUtils.isEmpty(start)) {
-			return service.findAllByBuyer(buyerId);
+			@RequestParam(name = "start", required = false, defaultValue = "") String start,
+			@RequestParam(name = "end", required = false, defaultValue = "") String end) {
+//		if (StringUtils.isEmpty(start) && StringUtils.isEmpty(end)) {
+//			return service.findAllByBuyer(buyerId);
+//		}
+		DateFormat format = new SimpleDateFormat("yyyyMMdd");
+		if (!StringUtils.isEmpty(start)) {
+			try {
+				format.parse(start);
+			} catch (ParseException e) {
+				throw new IllegalArgumentException("Parameter start not valid.");
+			}
 		}
-		DateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-		try {
-			format.parse(start);
-			format.parse(end);
-			return service.findAllUnderBuyerByPeriod(buyerId, start, end);
-		} catch (ParseException e) {
-			throw new IllegalArgumentException("Parameter not valid.");
+
+		if (!StringUtils.isEmpty(end)) {
+			try {
+				format.parse(end);
+			} catch (ParseException e) {
+				throw new IllegalArgumentException("Parameter end not valid.");
+			}
 		}
+
+		return service.findAllUnderBuyerByPeriod(buyerId, start, end);
 	}
 
 	/**
@@ -96,20 +107,27 @@ public class TransactionController {
 	 */
 	@GetMapping("seller/{id}")
 	public List<SellerTransactionVO> findAllUnderSellerByPeriod(@PathVariable("id") String sellerId,
-			@RequestParam("start") String start, @RequestParam("end") String end) {
+			@RequestParam(name = "start", required = false, defaultValue = "") String start,
+			@RequestParam(name = "end", required = false, defaultValue = "") String end) {
 
-		if (StringUtils.isEmpty(start)) {
-			return service.findAllBySeller(sellerId);
+		DateFormat format = new SimpleDateFormat("yyyyMMdd");
+		if (!StringUtils.isEmpty(start)) {
+			try {
+				format.parse(start);
+			} catch (ParseException e) {
+				throw new IllegalArgumentException("Parameter start not valid.");
+			}
 		}
 
-		DateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-		try {
-			format.parse(start);
-			format.parse(end);
-			return service.findAllUnderSellerByPeriod(sellerId, start, end);
-		} catch (ParseException e) {
-			throw new IllegalArgumentException("Parameter not valid.");
+		if (!StringUtils.isEmpty(end)) {
+			try {
+				format.parse(end);
+			} catch (ParseException e) {
+				throw new IllegalArgumentException("Parameter end not valid.");
+			}
 		}
+
+		return service.findAllUnderSellerByPeriod(sellerId, start, end);
 	}
 
 }

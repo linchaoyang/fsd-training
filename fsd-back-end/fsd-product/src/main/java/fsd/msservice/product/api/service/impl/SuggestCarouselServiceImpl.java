@@ -1,12 +1,15 @@
 package fsd.msservice.product.api.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fsd.msservice.product.api.domain.SuggestCarousel;
+import fsd.msservice.product.api.model.SuggestCarouselVO;
 import fsd.msservice.product.api.repository.SuggestCarouselRepository;
 import fsd.msservice.product.api.service.SuggestCarouselService;
 
@@ -24,8 +27,8 @@ public class SuggestCarouselServiceImpl implements SuggestCarouselService {
 	 */
 	@Override
 	@Transactional
-	public SuggestCarousel add(SuggestCarousel carousel) {
-		return repository.save(carousel);
+	public void add(SuggestCarouselVO carousel) {
+		update(carousel);
 	}
 
 	/**
@@ -36,29 +39,50 @@ public class SuggestCarouselServiceImpl implements SuggestCarouselService {
 	 */
 	@Override
 	@Transactional
-	public SuggestCarousel update(SuggestCarousel carousel) {
-		return repository.save(carousel);
+	public void update(SuggestCarouselVO carousel) {
+		SuggestCarousel entity = new SuggestCarousel();
+		try {
+			BeanUtils.copyProperties(entity, carousel);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		repository.save(entity);
 	}
 
 	/**
 	 * Get all Suggest Carousel
 	 * 
+	 * @param start
+	 * @param end
 	 * @return
 	 */
 	@Override
-	public List<SuggestCarousel> findAllWithinShowPeriod(String start, String end) {
-		return repository.findAllWithinShowPeriod(start, end);
+	public List<SuggestCarouselVO> findAllWithinShowPeriod(String start, String end) {
+		List<SuggestCarousel> queryResult = repository.findAllWithinShowPeriod(start, end);
+
+		List<SuggestCarouselVO> result = new ArrayList<>();
+		queryResult.forEach(entity -> {
+			SuggestCarouselVO vo = new SuggestCarouselVO();
+			try {
+				BeanUtils.copyProperties(vo, entity);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			result.add(vo);
+		});
+
+		return result;
 	}
 
 	/**
 	 * delete carousel
 	 * 
-	 * @param carousel
+	 * @param id
 	 */
 	@Override
 	@Transactional
-	public void delete(SuggestCarousel carousel) {
-		repository.delete(carousel);
+	public void delete(String id) {
+		repository.deleteById(id);
 	}
 
 }
