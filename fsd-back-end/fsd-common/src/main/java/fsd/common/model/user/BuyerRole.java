@@ -1,3 +1,4 @@
+
 package fsd.common.model.user;
 
 import java.util.List;

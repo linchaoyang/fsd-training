@@ -46,4 +46,5 @@ public class Buyer extends User {
 	@JoinTable(name = "buyer_brole", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	// @JsonIgnore
 	private List<BuyerRole> roles;
+
 }

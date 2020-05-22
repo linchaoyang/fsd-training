@@ -18,5 +18,4 @@ public class IllegalArgumentException extends RuntimeException {
 	public IllegalArgumentException(String message, Object... args) {
 		super(String.format(message, args));
 	}
-
 }

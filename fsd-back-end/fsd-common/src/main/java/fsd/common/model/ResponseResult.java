@@ -85,5 +85,4 @@ public class ResponseResult implements Serializable {
 	public static ResponseResult error(String msg) {
 		return new ResponseResult(CODE_ERROR, STATUS_ERROR, msg, null);
 	}
-
 }
