@@ -83,8 +83,8 @@ public class TransactionDetailEntity {
 	/**
 	 * Image url
 	 */
-	@Column(name = "imag_url", columnDefinition = "varchar(200) not null comment 'image url snapshot'")
-	private String imagUrl;
+	@Column(name = "image_url", columnDefinition = "varchar(200) not null comment 'image url snapshot'")
+	private String imageUrl;
 
 	/**
 	 * Purchased price

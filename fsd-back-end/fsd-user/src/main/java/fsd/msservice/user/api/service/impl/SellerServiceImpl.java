@@ -9,8 +9,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import fsd.model.user.Seller;
-import fsd.model.user.SellerRole;
+import fsd.common.model.user.Seller;
+import fsd.common.model.user.SellerRole;
 import fsd.msservice.user.api.exception.UserNotFoundException;
 import fsd.msservice.user.api.repository.SellerRepository;
 import fsd.msservice.user.api.service.SellerService;
@@ -19,91 +19,100 @@ import fsd.msservice.user.api.service.SellerService;
 // @Transactional
 public class SellerServiceImpl implements SellerService {
 
-    @Autowired
-    private SellerRepository repository;
+	@Autowired
+	private SellerRepository repository;
 
-    /**
-     * Regist Seller
-     * @param user
-     * @return
-     */
-    @Transactional
-    public Seller regist(Seller user) {
-        // if no roles data, then set the default Seller role
-        if (user.getRoles() == null || user.getRoles().size() == 0) {
-            SellerRole SellerRole = new SellerRole();
-            List<SellerRole> roles = new ArrayList<>();
-            roles.add(SellerRole);
-            user.setRoles(roles);
-        }
-        return repository.save(user);
-    }
+	/**
+	 * Regist Seller
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@Override
+	@Transactional
+	public Seller regist(Seller user) {
+		// if no roles data, then set the default Seller role
+		if (user.getRoles() == null || user.getRoles().size() == 0) {
+			SellerRole SellerRole = new SellerRole();
+			List<SellerRole> roles = new ArrayList<>();
+			roles.add(SellerRole);
+			user.setRoles(roles);
+		}
+		return repository.save(user);
+	}
 
-    /**
-     * Update user
-     * 
-     * @param user
-     * @return
-     */
-    @Transactional
-    public Seller update(Seller user) {
-        return repository.save(user);
-    }
+	/**
+	 * Update user
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@Override
+	@Transactional
+	public Seller update(Seller user) {
+		return repository.save(user);
+	}
 
-    public Long count() {
-        return repository.count();
-    }
+	@Override
+	public Long count() {
+		return repository.count();
+	}
 
-    /**
-     * Get all Sellers
-     * 
-     * @return
-     */
-    public List<Seller> findAll() {
-        return repository.findAll();
-    }
+	/**
+	 * Get all Sellers
+	 * 
+	 * @return
+	 */
+	@Override
+	public List<Seller> findAll() {
+		return repository.findAll();
+	}
 
-    /**
-     * Find one Seller
-     * 
-     * @param id
-     * @return
-     */
-    public Optional<Seller> findById(String id) {
-        return repository.findById(id);
-    }
+	/**
+	 * Find one Seller
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public Optional<Seller> findById(String id) {
+		return repository.findById(id);
+	}
 
-    /**
-     * Find Seller based by login user name
-     * 
-     * @param username
-     * @return
-     */
-    public Seller findByUsername(String username) throws UserNotFoundException {
-        Seller user = new Seller();
-        user.setUsername(username);
-        Example<Seller> example = Example.of(user);
-        return repository.findOne(example).orElseThrow(() -> new UserNotFoundException(username));
-    }
+	/**
+	 * Find Seller based by login user name
+	 * 
+	 * @param username
+	 * @return
+	 */
+	@Override
+	public Seller findByUsername(String username) throws UserNotFoundException {
+		Seller user = new Seller();
+		user.setUsername(username);
+		Example<Seller> example = Example.of(user);
+		return repository.findOne(example).orElseThrow(() -> new UserNotFoundException(username));
+	}
 
-    /**
-     * delete Seller
-     * 
-     * @param user
-     */
-    @Transactional
-    public void delete(Seller user) {
-        repository.delete(user);
-    }
+	/**
+	 * delete Seller
+	 * 
+	 * @param user
+	 */
+	@Override
+	@Transactional
+	public void delete(Seller user) {
+		repository.delete(user);
+	}
 
-    /**
-     * Delete the Seller by id
-     * 
-     * @param id
-     */
-    @Transactional
-    public void deleteById(String id) {
-        repository.deleteById(id);
-    }
+	/**
+	 * Delete the Seller by id
+	 * 
+	 * @param id
+	 */
+	@Override
+	@Transactional
+	public void deleteById(String id) {
+		repository.deleteById(id);
+	}
 
 }

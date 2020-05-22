@@ -176,7 +176,7 @@ create table transaction (
 );
 
 create table transaction_detail (
-    id varchar(64) not null comment 'transaction detail id', 
+    id integer not null auto_increment comment 'transaction detail id', 
     transaction_id varchar(64) not null comment 'transaction id', 
     seq char(1) not null comment 'detail index', 
     product_id varchar(64) not null comment 'product id', 

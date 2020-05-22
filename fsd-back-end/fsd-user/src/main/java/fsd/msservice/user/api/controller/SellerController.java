@@ -15,23 +15,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import fsd.model.user.Seller;
+import fsd.common.model.user.Seller;
 import fsd.msservice.user.api.service.SellerService;
 
 @RestController
 @RequestMapping(value = "/api/seller", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SellerController {
 
-    @Autowired
-    private SellerService service;
+	@Autowired
+	private SellerService service;
 
-    @GetMapping()
+	@GetMapping()
 	public List<Seller> findAll() {
 		return service.findAll();
 	}
-	
+
 	/**
 	 * Fing seller based on the user id
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -39,9 +40,10 @@ public class SellerController {
 	public Optional<Seller> findById(@PathVariable String id) {
 		return service.findById(id);
 	}
-	
+
 	/**
 	 * Find seller by login user name
+	 * 
 	 * @param username
 	 * @return
 	 */
@@ -49,9 +51,10 @@ public class SellerController {
 	public Seller findByUsername(@RequestParam("username") String username) {
 		return service.findByUsername(username);
 	}
-	
+
 	/**
 	 * Regist new seller
+	 * 
 	 * @param user
 	 * @return
 	 */
@@ -59,9 +62,10 @@ public class SellerController {
 	public Seller regist(@RequestBody Seller user) {
 		return service.regist(user);
 	}
- 
+
 	/**
 	 * Update seller information
+	 * 
 	 * @param user
 	 * @return
 	 */
@@ -69,9 +73,10 @@ public class SellerController {
 	public Seller update(@RequestBody Seller user) {
 		return service.update(user);
 	}
-	
+
 	/**
 	 * Delete seller based on the id
+	 * 
 	 * @param id
 	 */
 	@DeleteMapping("/{id}")

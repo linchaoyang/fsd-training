@@ -9,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import fsd.expection.ProductNotFoundException;
-import fsd.model.product.ProductSummaryVO;
-import fsd.model.user.Buyer;
+import fsd.common.expection.ProductNotFoundException;
+import fsd.common.model.product.ProductSummaryVO;
+import fsd.common.model.user.Buyer;
+import fsd.common.util.JpaConvertUtil;
 import fsd.msservice.transaction.api.entity.TransactionDetailEntity;
 import fsd.msservice.transaction.api.entity.TransactionEntity;
 import fsd.msservice.transaction.api.model.BuyerTransactionDetailVO;
@@ -24,7 +25,6 @@ import fsd.msservice.transaction.api.repository.TransactionDetailRepository;
 import fsd.msservice.transaction.api.repository.TransactionRepository;
 import fsd.msservice.transaction.api.repository.UserFeignClient;
 import fsd.msservice.transaction.api.service.TransactionService;
-import fsd.util.JpaConvertUtil;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -49,7 +49,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	@Transactional
-	public void add(NewTransaction transaction) {
+	public String add(NewTransaction transaction) {
 
 		// TODO check discount code whether is correct
 
@@ -75,16 +75,16 @@ public class TransactionServiceImpl implements TransactionService {
 			detailEntity.setProductId(detail.getProductId());
 			// purchase stock number
 			detailEntity.setStock(detail.getStock());
-			// seller id
-			detailEntity.setSellerId(detail.getSellerId());
 
 			// set information from product summary vo from other ms-service
-			// product name
-			detailEntity.setProductName(productSummaryVO.getName());
+			// seller id
+			detailEntity.setSellerId(productSummaryVO.getSellerId());
 			// seller name
 			detailEntity.setSellerName(productSummaryVO.getSellerName());
+			// product name
+			detailEntity.setProductName(productSummaryVO.getName());
 			// image url
-			detailEntity.setImagUrl(productSummaryVO.getImageUrl());
+			detailEntity.setImageUrl(productSummaryVO.getImageUrl());
 			// price
 			detailEntity.setPrice(productSummaryVO.getPrice());
 			// total tax
@@ -125,6 +125,8 @@ public class TransactionServiceImpl implements TransactionService {
 
 			detailRepository.save(entity);
 		}
+
+		return transactionEntity.getId();
 
 	}
 

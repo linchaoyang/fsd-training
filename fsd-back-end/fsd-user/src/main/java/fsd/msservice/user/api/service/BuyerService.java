@@ -3,62 +3,63 @@ package fsd.msservice.user.api.service;
 import java.util.List;
 import java.util.Optional;
 
-import fsd.model.user.Buyer;
+import fsd.common.model.user.Buyer;
 import fsd.msservice.user.api.exception.UserNotFoundException;
 
 public interface BuyerService {
-    
-    /**
-     * Regist buyer
-     * @param user
-     * @return
-     */
-    Buyer regist(Buyer user);
 
-    /**
-     * Update user
-     * 
-     * @param user
-     * @return
-     */
-    Buyer update(Buyer user);
+	/**
+	 * Regist buyer
+	 * 
+	 * @param user
+	 * @return
+	 */
+	Buyer regist(Buyer user);
 
-    Long count();
+	/**
+	 * Update user
+	 * 
+	 * @param user
+	 * @return
+	 */
+	Buyer update(Buyer user);
 
-    /**
-     * Get all buyers
-     * 
-     * @return
-     */
-    List<Buyer> findAll();
+	Long count();
 
-    /**
-     * Find one buyer
-     * 
-     * @param id
-     * @return
-     */
-    Optional<Buyer> findById(String id);
+	/**
+	 * Get all buyers
+	 * 
+	 * @return
+	 */
+	List<Buyer> findAll();
 
-    /**
-     * Find buyer based by login user name
-     * 
-     * @param username
-     * @return
-     */
-    Buyer findByUsername(String username) throws UserNotFoundException;
+	/**
+	 * Find one buyer
+	 * 
+	 * @param id
+	 * @return
+	 */
+	Optional<Buyer> findById(String id);
 
-    /**
-     * delete buyer
-     * 
-     * @param user
-     */
-    void delete(Buyer user);
+	/**
+	 * Find buyer based by login user name
+	 * 
+	 * @param username
+	 * @return
+	 */
+	Buyer findByUsername(String username) throws UserNotFoundException;
 
-    /**
-     * Delete the buyer by id
-     * 
-     * @param id
-     */
-    void deleteById(String id);
+	/**
+	 * delete buyer
+	 * 
+	 * @param user
+	 */
+	void delete(Buyer user);
+
+	/**
+	 * Delete the buyer by id
+	 * 
+	 * @param id
+	 */
+	void deleteById(String id);
 }

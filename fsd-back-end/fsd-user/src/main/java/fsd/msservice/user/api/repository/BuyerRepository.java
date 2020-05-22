@@ -5,11 +5,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import fsd.model.user.Buyer;
+import fsd.common.model.user.Buyer;
 
 @Repository
 public interface BuyerRepository extends JpaRepository<Buyer, String> {
-    
-    @Query("select u from Buyer u where lower(u.username) = lower(:username)") 
-    Buyer findByUsername(@Param("username") String username);
+
+	@Query("select u from Buyer u where lower(u.username) = lower(:username)")
+	Buyer findByUsername(@Param("username") String username);
 }

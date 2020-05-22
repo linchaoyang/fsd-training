@@ -1,12 +1,14 @@
 package fsd.msservice.transaction.api.controller;
 
 import java.text.DateFormat;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,14 +44,13 @@ public class TransactionController {
 	public List<BuyerTransactionVO> findAllUnderBuyerByPeriod(@PathVariable("id") String buyerId,
 			@RequestParam(name = "start", required = false, defaultValue = "") String start,
 			@RequestParam(name = "end", required = false, defaultValue = "") String end) {
-//		if (StringUtils.isEmpty(start) && StringUtils.isEmpty(end)) {
-//			return service.findAllByBuyer(buyerId);
-//		}
+
 		DateFormat format = new SimpleDateFormat("yyyyMMdd");
 		if (!StringUtils.isEmpty(start)) {
 			try {
 				format.parse(start);
 			} catch (ParseException e) {
+
 				throw new IllegalArgumentException("Parameter start not valid.");
 			}
 		}
@@ -82,8 +83,9 @@ public class TransactionController {
 	 * @return
 	 */
 	@PostMapping("")
-	public void add(@RequestBody NewTransaction transaction) {
-		service.add(transaction);
+	public ResponseEntity<String> add(@RequestBody NewTransaction transaction) {
+		String transactionId = service.add(transaction);
+		return ResponseEntity.ok(MessageFormat.format("Transaction created successfully: {0}", transactionId));
 	}
 
 	/**

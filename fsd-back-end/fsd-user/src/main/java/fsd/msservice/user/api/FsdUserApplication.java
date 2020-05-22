@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,19 +16,20 @@ import org.springframework.util.ObjectUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import fsd.model.user.Buyer;
-import fsd.model.user.BuyerRole;
-import fsd.model.user.Seller;
-import fsd.model.user.SellerRole;
-import fsd.model.user.UserStatus;
-import fsd.msservice.user.api.config.ApplicationConfig;
+import fsd.common.config.WebSecurityConfig;
+import fsd.common.model.user.Buyer;
+import fsd.common.model.user.BuyerRole;
+import fsd.common.model.user.Seller;
+import fsd.common.model.user.SellerRole;
+import fsd.common.model.user.UserStatus;
 import fsd.msservice.user.api.repository.BuyerRepository;
 import fsd.msservice.user.api.repository.BuyerRoleRepository;
 import fsd.msservice.user.api.repository.SellerRepository;
 import fsd.msservice.user.api.repository.SellerRoleRepository;
 
 @SpringBootApplication
-@Import(ApplicationConfig.class)
+@Import(WebSecurityConfig.class)
+@EntityScan("fsd.common.model")
 public class FsdUserApplication {
 
 	public static void main(String[] args) {

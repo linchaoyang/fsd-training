@@ -2,8 +2,8 @@ package fsd.msservice.product.api.service;
 
 import java.util.List;
 
-import fsd.model.product.ProductDetailVO;
-import fsd.model.product.ProductSummaryVO;
+import fsd.common.model.product.ProductDetailVO;
+import fsd.common.model.product.ProductSummaryVO;
 
 public interface ProductService {
 

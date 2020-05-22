@@ -39,7 +39,7 @@ public interface TransactionService {
 	 * 
 	 * @param transaction
 	 */
-	void add(NewTransaction transaction);
+	String add(NewTransaction transaction);
 
 	/**
 	 * Find transaction details

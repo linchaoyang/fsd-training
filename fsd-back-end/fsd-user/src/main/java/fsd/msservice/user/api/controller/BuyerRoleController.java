@@ -15,44 +15,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import fsd.model.user.BuyerRole;
-import fsd.model.user.base.RoleName;
+import fsd.common.model.user.BuyerRole;
+import fsd.common.model.user.base.RoleName;
 import fsd.msservice.user.api.service.BuyerRoleService;
 
 @RestController
 @RequestMapping(value = "/api/buyer/role", produces = MediaType.APPLICATION_JSON_VALUE)
 public class BuyerRoleController {
 
-    @Autowired
-    private BuyerRoleService service;
+	@Autowired
+	private BuyerRoleService service;
 
-    @GetMapping()
+	@GetMapping()
 	public List<BuyerRole> findAll() {
 		return service.findAll();
 	}
-	
+
 	@GetMapping("/{id}")
 	public Optional<BuyerRole> findById(@PathVariable Integer id) {
 		return service.findById(id);
 	}
-	
+
 	@GetMapping("/")
 	public Optional<BuyerRole> findByName(@RequestParam RoleName name) {
 		return service.findByName(name);
 	}
-	
+
 	@PutMapping()
 	public BuyerRole update(@RequestBody BuyerRole role) {
 		return service.add(role);
 	}
-	
+
 	@PostMapping()
 	public BuyerRole add(@RequestBody BuyerRole role) {
 		return service.update(role);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Integer id) {
 		service.delete(id);
-    }
+	}
 }
