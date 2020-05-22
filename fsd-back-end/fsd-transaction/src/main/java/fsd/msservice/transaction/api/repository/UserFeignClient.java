@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import fsd.model.user.Buyer;
+import fsd.common.model.user.Buyer;
 
 @FeignClient(name = "fsd-user")
 public interface UserFeignClient {

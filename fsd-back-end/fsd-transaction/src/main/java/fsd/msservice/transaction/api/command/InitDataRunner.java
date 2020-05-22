@@ -52,7 +52,7 @@ public class InitDataRunner implements CommandLineRunner {
 			detail.setSellerId("2d8beb47-1766-46fa-a89c-3105d9238251");
 			detail.setSellerName("zls");
 			detail.setStock(2);
-			detail.setImagUrl("http://sss.com/x.gif");
+			detail.setImageUrl("http://sss.com/x.gif");
 			detail.setPrice(new BigDecimal(150.00));
 			detail.setTotalAmount(new BigDecimal(250.00));
 			detail.setTotalTax(new BigDecimal(12.50));
@@ -67,7 +67,7 @@ public class InitDataRunner implements CommandLineRunner {
 			detail.setSellerId("2d8beb47-1766-46fa-a89c-3105d9238251");
 			detail.setSellerName("zls");
 			detail.setStock(2);
-			detail.setImagUrl("http://sss.com/x.gif");
+			detail.setImageUrl("http://sss.com/x.gif");
 			detail.setPrice(new BigDecimal(150.00));
 			detail.setTotalAmount(new BigDecimal(250.00));
 			detail.setTotalTax(new BigDecimal(12.50));

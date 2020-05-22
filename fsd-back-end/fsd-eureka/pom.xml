@@ -13,12 +13,6 @@
 	<description>Eureka server</description>
 
 	<dependencies>
-		<dependency>
-			<groupId>fsd.msservice</groupId>
-			<artifactId>fsd-common</artifactId>
-			<version>${fsd.version}</version>
-		</dependency>
-	
 	<!--
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>

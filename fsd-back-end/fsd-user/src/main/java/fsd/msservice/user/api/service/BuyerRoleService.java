@@ -3,23 +3,23 @@ package fsd.msservice.user.api.service;
 import java.util.List;
 import java.util.Optional;
 
-import fsd.model.user.BuyerRole;
-import fsd.model.user.base.RoleName;
+import fsd.common.model.user.BuyerRole;
+import fsd.common.model.user.base.RoleName;
 
 public interface BuyerRoleService {
 
-    Long count();
+	Long count();
 
-    List<BuyerRole> findAll();
+	List<BuyerRole> findAll();
 
-    Optional<BuyerRole> findById(Integer id);
+	Optional<BuyerRole> findById(Integer id);
 
-    Optional<BuyerRole> findByName(RoleName name);
+	Optional<BuyerRole> findByName(RoleName name);
 
-    BuyerRole add(BuyerRole role);
+	BuyerRole add(BuyerRole role);
 
-    BuyerRole update(BuyerRole role);
+	BuyerRole update(BuyerRole role);
 
-    void delete(Integer id);
+	void delete(Integer id);
 
 }

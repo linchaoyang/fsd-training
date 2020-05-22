@@ -17,9 +17,6 @@ public class NewTransactionDetail implements Serializable {
 	/** Product id */
 	private String productId;
 
-	/** Seller id */
-	private String sellerId;
-
 	/**
 	 * Purchased stock number for this product
 	 */

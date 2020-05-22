@@ -5,12 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import fsd.model.user.Seller;
+import fsd.common.model.user.Seller;
 import fsd.msservice.auth.api.domain.AuthSeller;
 
 @Repository
 public interface SellerRepository extends JpaRepository<AuthSeller, String> {
-    
-    @Query("select u from AuthSeller u where lower(u.username) = lower(:username)") 
-    Seller findByUsername(@Param("username") String username);
+
+	@Query("select u from AuthSeller u where lower(u.username) = lower(:username)")
+	Seller findByUsername(@Param("username") String username);
 }

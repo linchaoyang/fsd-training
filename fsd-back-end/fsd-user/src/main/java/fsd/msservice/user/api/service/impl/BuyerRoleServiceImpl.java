@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
-import fsd.model.user.BuyerRole;
-import fsd.model.user.base.RoleName;
+import fsd.common.model.user.BuyerRole;
+import fsd.common.model.user.base.RoleName;
 import fsd.msservice.user.api.repository.BuyerRoleRepository;
 import fsd.msservice.user.api.service.BuyerRoleService;
 

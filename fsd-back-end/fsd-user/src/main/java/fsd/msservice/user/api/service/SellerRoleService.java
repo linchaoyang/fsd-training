@@ -3,23 +3,23 @@ package fsd.msservice.user.api.service;
 import java.util.List;
 import java.util.Optional;
 
-import fsd.model.user.SellerRole;
-import fsd.model.user.base.RoleName;
+import fsd.common.model.user.SellerRole;
+import fsd.common.model.user.base.RoleName;
 
 public interface SellerRoleService {
 
-    Long count();
+	Long count();
 
-    List<SellerRole> findAll();
+	List<SellerRole> findAll();
 
-    Optional<SellerRole> findById(Integer id);
+	Optional<SellerRole> findById(Integer id);
 
-    Optional<SellerRole> findByName(RoleName name);
+	Optional<SellerRole> findByName(RoleName name);
 
-    SellerRole add(SellerRole role);
+	SellerRole add(SellerRole role);
 
-    SellerRole update(SellerRole role);
+	SellerRole update(SellerRole role);
 
-    void delete(Integer id);
+	void delete(Integer id);
 
 }

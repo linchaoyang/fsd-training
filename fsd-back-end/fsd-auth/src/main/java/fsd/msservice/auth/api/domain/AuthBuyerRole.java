@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import fsd.model.user.base.RoleName;
+import fsd.common.model.user.base.RoleName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,17 +22,17 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 public class AuthBuyerRole {
-  
-  @Id
-  @Column(name = "ID")
-  @JsonIgnore
-  private Integer id;
 
-  @Column(name = "name")
-  @Enumerated(EnumType.STRING)
-  private RoleName name;
+	@Id
+	@Column(name = "ID")
+	@JsonIgnore
+	private Integer id;
 
-  @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-  @JsonIgnore
-  private List<AuthBuyer> users;
+	@Column(name = "name")
+	@Enumerated(EnumType.STRING)
+	private RoleName name;
+
+	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<AuthBuyer> users;
 }

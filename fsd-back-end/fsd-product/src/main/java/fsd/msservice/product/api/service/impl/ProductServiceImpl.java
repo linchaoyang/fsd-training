@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
-import fsd.expection.ProductNotFoundException;
-import fsd.model.product.ProductCarouselVO;
-import fsd.model.product.ProductDetailVO;
-import fsd.model.product.ProductSummaryVO;
+import fsd.common.expection.ProductNotFoundException;
+import fsd.common.model.product.ProductCarouselVO;
+import fsd.common.model.product.ProductDetailVO;
+import fsd.common.model.product.ProductSummaryVO;
+import fsd.common.util.JpaConvertUtil;
 import fsd.msservice.product.api.domain.Product;
 import fsd.msservice.product.api.domain.ProductCarousel;
 import fsd.msservice.product.api.repository.ProductCarouselRepository;
 import fsd.msservice.product.api.repository.ProductRepository;
 import fsd.msservice.product.api.service.ProductService;
-import fsd.util.JpaConvertUtil;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -88,10 +88,12 @@ public class ProductServiceImpl implements ProductService {
 		List<ProductCarouselVO> carousels = new ArrayList<>();
 		result.setCarousels(carousels);
 		queryResult.forEach(record -> {
-
-			ProductCarouselVO carousel = JpaConvertUtil.convertResult(record, ProductCarouselVO.class);
-			carousels.add(carousel);
-
+			Object carouselImageUrl = record.get("carouselImageUrl");
+			if (carouselImageUrl != null) {
+				ProductCarouselVO carousel = new ProductCarouselVO();
+				carousel.setImageUrl((String) carouselImageUrl);
+				carousels.add(carousel);
+			}
 		});
 
 		return result;

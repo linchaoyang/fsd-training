@@ -25,7 +25,7 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 	@Query(value = "select p.id as id, p.name as name, p.image_url as imageUrl, p.manufacture as manufacture,"
 			+ "p.seller_id as sellerId, s.username as sellerName, p.price as price, sc.tax as tax,"
 			+ "c.id as categoryId, c.name as categoryName, sc.id as subcategoryId, sc.name as subcategoryName,"
-			+ "p.description as description, p.stock_number as stockNumber, p.remarks as remarks, pc.image_url as imageUrl"
+			+ "p.description as description, p.stock_number as stockNumber, p.remarks as remarks, pc.image_url as carouselImageUrl"
 			+ " from product p" + " left join product_carousel pc on p.id = pc.product_id"
 			+ " inner join seller s, category c, subcategory sc"
 			+ " where p.seller_id = s.id and p.category_id = c.id and p.subcategory_id = sc.id"

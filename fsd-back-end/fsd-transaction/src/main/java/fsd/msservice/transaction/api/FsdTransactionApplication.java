@@ -7,10 +7,11 @@ import org.springframework.context.annotation.Import;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import fsd.common.config.WebSecurityConfig;
 import fsd.msservice.transaction.api.config.ApplicationConfig;
 
 @SpringBootApplication
-@Import({ ApplicationConfig.class })
+@Import({ WebSecurityConfig.class, ApplicationConfig.class })
 public class FsdTransactionApplication {
 
 	public static void main(String[] args) {

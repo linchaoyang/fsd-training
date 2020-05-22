@@ -11,7 +11,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
-import fsd.model.ResponseResult;
+import fsd.common.model.ResponseResult;
 import fsd.msservice.auth.util.HandlerUtil;
 import lombok.extern.slf4j.Slf4j;
 

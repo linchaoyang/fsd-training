@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import fsd.model.product.ProductSummaryVO;
+import fsd.common.model.product.ProductSummaryVO;
 import fsd.msservice.product.api.domain.Product;
 import fsd.msservice.product.api.service.ProductService;
 
