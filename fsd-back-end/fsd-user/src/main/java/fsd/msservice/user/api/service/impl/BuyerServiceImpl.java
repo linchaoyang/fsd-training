@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,12 @@ public class BuyerServiceImpl implements BuyerService {
 	private BuyerRepository repository;
 
 	/**
+	 * Load BCryptPasswordEncoder
+	 */
+	@Autowired
+	private PasswordEncoder encoder;
+
+	/**
 	 * Regist buyer
 	 * 
 	 * @param user
@@ -38,6 +45,7 @@ public class BuyerServiceImpl implements BuyerService {
 			roles.add(buyerRole);
 			user.setRoles(roles);
 		}
+		user.setPassword(encoder.encode(user.getPassword()));
 		return repository.save(user);
 	}
 

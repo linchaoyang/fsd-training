@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,12 @@ public class SellerServiceImpl implements SellerService {
 	private SellerRepository repository;
 
 	/**
+	 * Load BCryptPasswordEncoder
+	 */
+	@Autowired
+	private PasswordEncoder encoder;
+
+	/**
 	 * Regist Seller
 	 * 
 	 * @param user
@@ -38,6 +45,8 @@ public class SellerServiceImpl implements SellerService {
 			roles.add(SellerRole);
 			user.setRoles(roles);
 		}
+
+		user.setPassword(encoder.encode(user.getPassword()));
 		return repository.save(user);
 	}
 
