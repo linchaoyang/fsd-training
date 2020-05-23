@@ -33,7 +33,7 @@ create table buyer (
 );
 
 create table brole (
-    id integer not null auto_increment, 
+    id int not null auto_increment, 
     name varchar(100), 
     note varchar(200), 
     created_date datetime(6), 
@@ -43,7 +43,7 @@ create table brole (
 
 create table buyer_brole (
     user_id varchar(64) not null, 
-    role_id integer not null,
+    role_id int not null,
     CONSTRAINT fk_brole foreign key (role_id) references brole (id),
     CONSTRAINT fk_buyer foreign key (user_id) references buyer (id) on update cascade on delete cascade
 );
@@ -68,7 +68,7 @@ create table seller (
 );
 
 create table srole (
-    id integer not null auto_increment, 
+    id int not null auto_increment, 
     name varchar(100), 
     note varchar(200), 
     created_date datetime(6), 
@@ -78,7 +78,7 @@ create table srole (
 
 create table seller_srole (
     user_id varchar(64) not null, 
-    role_id integer not null,
+    role_id int not null,
     CONSTRAINT fk_srole foreign key (role_id) references srole (id),
     CONSTRAINT fk_seller foreign key (user_id) references seller (id) on update cascade on delete cascade
 );
@@ -87,7 +87,7 @@ drop table if exists subcategory;
 drop table if exists category;
 
 create table category (
-    id integer not null auto_increment comment 'category id', 
+    id int not null auto_increment comment 'category id', 
     name varchar(200) not null comment 'category name', 
     description varchar(2000) not null comment 'category description', 
     created_date datetime(6), 
@@ -96,8 +96,8 @@ create table category (
 );
 
 create table subcategory (
-    id integer not null auto_increment comment 'subcategory id', 
-    category_id integer not null comment 'category id', 
+    id int not null auto_increment comment 'subcategory id', 
+    category_id int not null comment 'category id', 
     name varchar(200) not null comment 'subcategory name', 
     description varchar(2000) not null comment 'subcategory description', 
     tax DECIMAL(7,2) not null comment 'tax percent, 5.5 means 5.5%', 
@@ -120,8 +120,8 @@ create table product (
     status char(1) not null default '0' comment 'Normal:0 / Locked:1 / Disabled: 2', 
     stock_number int not null comment 'product stock number', 
     image_url varchar(200) not null comment 'image url', 
-    category_id integer not null comment 'category id', 
-    subcategory_id integer not null comment 'subcategory id', 
+    category_id int not null comment 'category id', 
+    subcategory_id int not null comment 'subcategory id', 
     seller_id varchar(64) not null comment 'seller id', 
     manufacture varchar(100) not null comment 'manufacture',
     created_date datetime(6), 
@@ -130,7 +130,7 @@ create table product (
 );
 
 create table product_carousel (
-    id integer not null auto_increment, 
+    id int not null auto_increment, 
     created_date datetime(6), 
     image_url varchar(200) not null comment 'image url', 
     seq char(1) not null comment 'image carousel index', 
@@ -141,7 +141,7 @@ create table product_carousel (
 );
 
 create table suggest_carousel (
-    id integer not null auto_increment, 
+    id int not null auto_increment, 
     created_date datetime(6), 
     description varchar(200) not null comment 'image description', 
     end_time datetime not null comment 'show end time', 
@@ -176,7 +176,7 @@ create table transaction (
 );
 
 create table transaction_detail (
-    id integer not null auto_increment comment 'transaction detail id', 
+    id int not null auto_increment comment 'transaction detail id', 
     transaction_id varchar(64) not null comment 'transaction id', 
     seq char(1) not null comment 'detail index', 
     product_id varchar(64) not null comment 'product id', 
@@ -192,4 +192,16 @@ create table transaction_detail (
     updated_date datetime(6), 
     primary key (id),
     CONSTRAINT fk_transaction_detail foreign key (transaction_id) references transaction (id)
+);
+
+drop table if exists cart;
+create table cart (
+	id int not null auto_increment comment 'cart id', 
+	product_id varchar(64) not null comment 'product id', 
+	buyer_id varchar(64) not null comment 'buyer id', 
+	stock_number int not null comment 'purchase stock number', 
+    created_date datetime(6), 
+    updated_date datetime(6), 
+    primary key (id),
+    unique key uk_cart001 (product_id, buyer_id)
 );
