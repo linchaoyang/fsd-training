@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import fsd.common.model.transaction.NewTransaction;
 import fsd.msservice.transaction.api.model.BuyerTransactionDetailVO;
 import fsd.msservice.transaction.api.model.BuyerTransactionVO;
-import fsd.msservice.transaction.api.model.NewTransaction;
 import fsd.msservice.transaction.api.model.SellerTransactionVO;
 import fsd.msservice.transaction.api.service.TransactionService;
 

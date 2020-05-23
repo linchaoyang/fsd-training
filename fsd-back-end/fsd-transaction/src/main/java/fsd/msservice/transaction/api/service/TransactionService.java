@@ -2,9 +2,9 @@ package fsd.msservice.transaction.api.service;
 
 import java.util.List;
 
+import fsd.common.model.transaction.NewTransaction;
 import fsd.msservice.transaction.api.model.BuyerTransactionDetailVO;
 import fsd.msservice.transaction.api.model.BuyerTransactionVO;
-import fsd.msservice.transaction.api.model.NewTransaction;
 import fsd.msservice.transaction.api.model.SellerTransactionVO;
 
 public interface TransactionService {

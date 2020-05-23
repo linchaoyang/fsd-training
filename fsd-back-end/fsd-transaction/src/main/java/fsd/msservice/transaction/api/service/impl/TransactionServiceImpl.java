@@ -11,14 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fsd.common.expection.ProductNotFoundException;
 import fsd.common.model.product.ProductSummaryVO;
+import fsd.common.model.transaction.NewTransaction;
+import fsd.common.model.transaction.NewTransactionDetail;
 import fsd.common.model.user.Buyer;
 import fsd.common.util.JpaConvertUtil;
 import fsd.msservice.transaction.api.entity.TransactionDetailEntity;
 import fsd.msservice.transaction.api.entity.TransactionEntity;
 import fsd.msservice.transaction.api.model.BuyerTransactionDetailVO;
 import fsd.msservice.transaction.api.model.BuyerTransactionVO;
-import fsd.msservice.transaction.api.model.NewTransaction;
-import fsd.msservice.transaction.api.model.NewTransactionDetail;
 import fsd.msservice.transaction.api.model.SellerTransactionVO;
 import fsd.msservice.transaction.api.repository.ProductFeignClient;
 import fsd.msservice.transaction.api.repository.TransactionDetailRepository;

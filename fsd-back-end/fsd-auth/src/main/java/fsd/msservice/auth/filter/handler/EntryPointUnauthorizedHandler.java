@@ -35,7 +35,7 @@ public class EntryPointUnauthorizedHandler implements AuthenticationEntryPoint {
 			// 500
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		} else {
-			msg = ResponseResult.error("Nedd login");
+			msg = ResponseResult.error("Need login");
 			// 401
 			status = HttpStatus.UNAUTHORIZED;
 		}
