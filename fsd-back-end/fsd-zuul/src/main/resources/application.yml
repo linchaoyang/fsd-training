@@ -1,0 +1,98 @@
+
+app.auth-path-config:
+  #allow access for rest api who login / get token
+  login-path:
+    - url:
+        - /**/auth/login
+  non-auth-path:
+    #allow all static resource access
+    - method:
+        - GET
+      url:
+        - /
+        - /favicon.ico
+        - /error
+        - /*.html
+        - /**/*.html
+        - /**/*.css
+        - /**/*.js
+    - method:
+        - OPTIONS
+      url:
+        - /**
+
+app:
+  jwt:
+    # Token expire days
+    expire: 7
+    # Private Security key
+    salt: 78sebr72umyz33i9876gc31urjgyfhgj
+    # Token issuer
+    issuer: fsd-emart
+  
+server:
+  port: 8006
+
+spring:
+  application:
+    name: fsd-zuul
+
+logging:
+  level:
+    com.netflix: DEBUG
+    com.bruin.cloud.zuul.filters: DEBUG
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+ribbon:  
+   ReadTimeout: 30000
+   ConnectTimeout: 30000
+   
+zuul:
+  ignored-services: '*'
+  prefix: /v1
+  host:
+      connect-timeout-millis: 30000
+      socket-timeout-millis: 30000
+  add-proxy-headers: true
+  routes:
+    auth:
+      path: /auth/**
+      service-id: fsd-auth
+    
+    buyer:
+      path: /api/buyer/**
+      service-id: fsd-user
+    
+    seller:
+      path: /api/seller/**
+      service-id: fsd-user
+    
+    category:
+      path: /api/category/**
+      service-id: fsd-category
+    
+    product:
+      path: /api/product/**
+      service-id: fsd-product
+      
+    carousel:
+      path: /api/carousel/**
+      service-id: fsd-product
+      
+    cart:
+      path: /api/cart/**
+      service-id: fsd-cart
+    
+    transaction:
+      path: /api/transaction/**
+      service-id: fsd-transaction
+  
+      
