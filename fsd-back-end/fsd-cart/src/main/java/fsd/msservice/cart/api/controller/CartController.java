@@ -20,7 +20,7 @@ import fsd.msservice.cart.api.service.CartService;
 
 @RestController
 @RequestMapping(value = "/api/cart", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CategoryController {
+public class CartController {
 	@Autowired
 	private CartService service;
 
