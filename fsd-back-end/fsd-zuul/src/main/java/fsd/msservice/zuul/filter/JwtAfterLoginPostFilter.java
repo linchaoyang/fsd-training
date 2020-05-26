@@ -66,7 +66,7 @@ public class JwtAfterLoginPostFilter extends ZuulFilter {
 	 */
 	@Override
 	public int filterOrder() {
-		return FilterConstants.SEND_RESPONSE_FILTER_ORDER - 2;
+		return FilterConstants.SEND_RESPONSE_FILTER_ORDER - 1;
 	}
 
 	/**
@@ -97,15 +97,29 @@ public class JwtAfterLoginPostFilter extends ZuulFilter {
 	@Override
 	public Object run() throws ZuulException {
 		RequestContext ctx = RequestContext.getCurrentContext();
+		String body = "";
+		try {
+			InputStream stream = ctx.getResponseDataStream();
+			body = StreamUtils.copyToString(stream, StandardCharsets.UTF_8);
+
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
 
 		if (ctx.getResponseStatusCode() != HttpStatus.OK.value()) {
-			log.info("Loing authorize failed");
-			ctx.setSendZuulResponse(false);
+			log.info("Login authorize failed");
+
 		} else {
-			log.info("Loing authorize success");
+			log.info("Login authorize success");
 			try {
-				InputStream stream = ctx.getResponseDataStream();
-				String body = StreamUtils.copyToString(stream, StandardCharsets.UTF_8);
+				// InputStream stream = ctx.getResponseDataStream();
+				/*
+				 * { "timestamp": 1590514783658, "code": 0, "message": "success", "data": {
+				 * "userType": "0", "userId": "daf49ca9-7898-44d5-bd2b-f8a92300ed54",
+				 * "authorities": [ "ROLE_BUYER" ], "username": "zz" } }
+				 * 
+				 */
+				// String body = StreamUtils.copyToString(stream, StandardCharsets.UTF_8);
 				Result<HashMap<String, Object>> result = objectMapper.readValue(body,
 						new TypeReference<Result<HashMap<String, Object>>>() {
 						});
@@ -135,7 +149,7 @@ public class JwtAfterLoginPostFilter extends ZuulFilter {
 					ctx.addZuulResponseHeader(HEADER_AUTHORIZATION, TOKEN_HEAD + token);
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				log.error(e.getMessage());
 			}
 		}
 
