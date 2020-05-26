@@ -1,0 +1,22 @@
+package fsd.msservice.auth.controller;
+
+import java.util.Map;
+
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import lombok.extern.slf4j.Slf4j;
+
+@RestController
+@RequestMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
+@Slf4j
+public class AuthController {
+
+	@PostMapping("/login")
+	public void login(@RequestBody Map<String, String> userNameAndPassword) {
+		log.debug(userNameAndPassword.get("username"));
+	}
+}

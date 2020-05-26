@@ -1,4 +1,4 @@
-package fsd.msservice.auth.api.domain;
+package fsd.msservice.auth.domain;
 
 import java.util.List;
 

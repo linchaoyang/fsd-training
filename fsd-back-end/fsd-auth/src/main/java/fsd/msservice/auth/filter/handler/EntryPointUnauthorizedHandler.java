@@ -11,8 +11,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
-import fsd.common.model.ResponseResult;
-import fsd.msservice.auth.util.HandlerUtil;
+import fsd.common.model.Result;
+import fsd.common.util.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -27,20 +27,20 @@ public class EntryPointUnauthorizedHandler implements AuthenticationEntryPoint {
 		// We should just send a 401 Unauthorized response because there is no 'login
 		// page' to redirect to
 		log.info(authException.getMessage());
-		ResponseResult msg;
+		Result<?> msg;
 		HttpStatus status;
 		Object jwtErr = request.getAttribute("jwterror");
 		if (jwtErr != null) {
-			msg = ResponseResult.error(jwtErr.toString());
+			msg = Result.error(jwtErr.toString());
 			// 500
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		} else {
-			msg = ResponseResult.error("Need login");
+			msg = Result.error("Need login");
 			// 401
 			status = HttpStatus.UNAUTHORIZED;
 		}
 
-		HandlerUtil.setResponse(response, status, msg);
+		ResponseUtil.setResponse(response, status, msg);
 
 	}
 

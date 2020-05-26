@@ -11,8 +11,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
-import fsd.common.model.ResponseResult;
-import fsd.msservice.auth.util.HandlerUtil;
+import fsd.common.model.Result;
+import fsd.common.util.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -32,11 +32,11 @@ public class AuthenctiationFailureHandler extends SimpleUrlAuthenticationFailure
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 
-		log.info("Login failure:{}");
+		log.info("Login failure: {}", exception);
 
-		ResponseResult msg = ResponseResult.error(exception.getMessage());
+		Result<?> msg = Result.error(exception.getClass().getName(), exception.getMessage());
 
-		HandlerUtil.setResponse(response, HttpStatus.INTERNAL_SERVER_ERROR, msg);
+		ResponseUtil.setResponse(response, HttpStatus.INTERNAL_SERVER_ERROR, msg);
 	}
 
 }
