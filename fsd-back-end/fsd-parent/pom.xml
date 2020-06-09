@@ -23,6 +23,7 @@
 		<docker.registry.name>waitswallow</docker.registry.name>
 		<docker.repository.name>${docker.registry.name}/${project.artifactId}</docker.repository.name>
 		<docker.image>${project.artifactId}:${project.version}</docker.image>
+		<resource.delimiter>#</resource.delimiter>
 	</properties>
 
 	<dependencies>
