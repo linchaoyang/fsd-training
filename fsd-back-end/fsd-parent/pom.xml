@@ -19,6 +19,10 @@
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.SR4</spring-cloud.version>
 		<fsd.version>0.0.1-SNAPSHOT</fsd.version>
+		<docker-maven-plugin.version>1.2.2</docker-maven-plugin.version>
+		<docker.registry.name>waitswallow</docker.registry.name>
+		<docker.repository.name>${docker.registry.name}/${project.artifactId}</docker.repository.name>
+		<docker.image>${project.artifactId}:${project.version}</docker.image>
 	</properties>
 
 	<dependencies>
