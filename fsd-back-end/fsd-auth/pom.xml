@@ -38,6 +38,46 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>${docker-maven-plugin.version}</version>
+				<configuration>
+					<imageName>${docker.repository.name}</imageName>
+					<imageTags>
+                        <imageTag>latest</imageTag>
+                    </imageTags>
+					<!-- Copy docker file to ${project.build.directory}/docker -->
+					<dockerDirectory>src/main/docker</dockerDirectory>
+					<resources>
+						<resource>
+			                <targetPath>/</targetPath>
+			             	<directory>${project.build.directory}</directory>
+			             	<include>${project.build.finalName}.jar</include>
+			           	</resource>
+					</resources>
+					<buildArgs>
+						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+					
+				</configuration>
+				<executions>
+					<!-- remove previous image before build -->
+					<execution>
+                        <id>remove-tag-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>removeImage</goal>
+                        </goals>
+                        <configuration>
+                            <imageName>${docker.repository.name}</imageName>
+                            <imageTags>
+                                <imageTag>latest</imageTag>
+                            </imageTags>
+                        </configuration>
+                    </execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
