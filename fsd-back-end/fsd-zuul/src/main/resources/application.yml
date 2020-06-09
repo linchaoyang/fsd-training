@@ -41,6 +41,10 @@ logging:
   level:
     com.netflix: DEBUG
     com.bruin.cloud.zuul.filters: DEBUG
+    org:
+      springframework:
+        cloud:
+          netflix: trace
 
 eureka:
   client:
@@ -56,43 +60,43 @@ ribbon:
    ConnectTimeout: 30000
    
 zuul:
-  ignored-services: '*'
-  prefix: /v1
+  #ignored-services: '*'
+  #prefix: /v1
   host:
       connect-timeout-millis: 30000
       socket-timeout-millis: 30000
-  add-proxy-headers: true
+  #add-proxy-headers: true
   routes:
     auth:
-      path: /auth/**
+      path: /**/auth/**
       service-id: fsd-auth
     
     buyer:
-      path: /api/buyer/**
+      path: /**/api/buyer/**
       service-id: fsd-user
     
     seller:
-      path: /api/seller/**
+      path: /**/api/seller/**
       service-id: fsd-user
     
     category:
-      path: /api/category/**
+      path: /**/api/category/**
       service-id: fsd-category
     
     product:
-      path: /api/product/**
+      path: /**/api/product/**
       service-id: fsd-product
       
     carousel:
-      path: /api/carousel/**
+      path: /**/api/carousel/**
       service-id: fsd-product
       
     cart:
-      path: /api/cart/**
+      path: /**/api/cart/**
       service-id: fsd-cart
     
     transaction:
-      path: /api/transaction/**
+      path: /**/api/transaction/**
       service-id: fsd-transaction
   
       
