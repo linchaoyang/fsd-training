@@ -21,7 +21,7 @@ public class ResponseUtil {
 		// Access-Control-Allow-Origin
 		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
 		// "application/json;charset=UTF-8"
-		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+		response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 		// set response code
 		response.setStatus(status.value());
 		// write result
